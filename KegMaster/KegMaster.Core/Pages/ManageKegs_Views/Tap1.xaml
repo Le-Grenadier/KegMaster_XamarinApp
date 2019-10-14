@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="KegMaster.Core.Pages.ManageKegs_Views.Tap1"
+    Title="Tap 1"
+    Icon="icon.png">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Keg Master: Tap 1"
+                       VerticalOptions="Start"
+                       HorizontalTextAlignment="Center"
+                       HorizontalOptions="FillAndExpand" />
+                <BoxView Color="Transparent"
+                         VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand" />
+                <StackLayout x:Name="slKeg"
+                             Padding="20,5,20,5">
+                    <!-- Keg Name -->
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="labelKegName"
+                               Text="Name: Keg Name"
+                               VerticalOptions="End"
+                               HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="entryKegName"
+                               Placeholder="{Binding Name}"
+                               MaxLength="25"
+                               IsSpellCheckEnabled="True"
+                               IsTextPredictionEnabled="True"
+                               IsPassword="False" />
+                    </StackLayout>
+                    <!-- Style -->
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="labelKegStyle"
+                               Text="Style: Keg Name"
+                               VerticalOptions="End"
+                               HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="entryKegStyle"
+                               Placeholder="{Binding Style}"
+                               MaxLength="25"
+                               IsSpellCheckEnabled="True"
+                               IsTextPredictionEnabled="True"
+                               IsPassword="False" />
+                    </StackLayout>
+                    <!-- Description -->
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="labelDescription"
+                               Text="Description: Best Keg Ever"
+                               VerticalOptions="End"
+                               HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="entryDescription"
+                               Placeholder="{Binding Description}"
+                               MaxLength="15"
+                               IsSpellCheckEnabled="True"
+                               IsTextPredictionEnabled="True"
+                               IsPassword="False" />
+                    </StackLayout>
+                    <!-- Date Kegged -->
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="labelDateKegged"
+                               Text="Date Kegged: --/--/--"
+                               VerticalOptions="End"
+                               HorizontalOptions="FillAndExpand" />
+                        <!--Entry x:Name="entryDateKegged" Placeholder="{Binding DateKegged}" MaxLength="15" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True" IsPassword="False" /-->
+                        <DatePicker x:Name="startDatePicker"
+                                    Format="ddd, MMM d, yyyy"
+                                    Margin="30, 0, 0, 30"
+                                    DateSelected="OnKegDateSelected" />
+                    </StackLayout>
+                    <!-- Date Available -->
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="labelDateAvailable"
+                               Text="Date Available: --/--/--"
+                               VerticalOptions="End"
+                               HorizontalOptions="FillAndExpand" />
+                        <!--Entry x:Name="entryDateAvailable" Placeholder="{Binding DateAvailable}" MaxLength="15" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True" IsPassword="False" /-->
+                        <DatePicker x:Name="endDatePicker"
+                                    Format="ddd, MMM d, yyyy"
+                                    Margin="30, 0, 0, 30"
+                                    DateSelected="OnServeDateSelected"
+                                    MinimumDate="{Binding Source={x:Reference startDatePicker}, Path=Date}" />
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <Grid>
+                            <!-- Qty Remaining -->
+                            <Label Grid.Column="0"
+                                   Grid.Row="0"
+                                   x:Name="labelQtyRemain"
+                                   Text="Qty Remain: 00 Gal (est)"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand" />
+                            <Entry Grid.Column="0"
+                                   Grid.Row="1"
+                                   x:Name="entryQtyRemain"
+                                   Placeholder="{Binding QtyRemain}"
+                                   Keyboard="Numeric"
+                                   MaxLength="15"
+                                   IsSpellCheckEnabled="True"
+                                   IsTextPredictionEnabled="True"
+                                   IsPassword="False" />
+
+                            <!-- Qty Reserve-->
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
+                                   x:Name="labelQtyReserve"
+                                   Text="Qty Reserve: 00 Gal (est)"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand" />
+                            <Entry Grid.Column="1"
+                                   Grid.Row="1"
+                                   x:Name="entryQtyReserve"
+                                   Placeholder="{Binding QtyReserve}"
+                                   Keyboard="Numeric"
+                                   MaxLength="15"
+                                   IsSpellCheckEnabled="True"
+                                   IsTextPredictionEnabled="True"
+                                   IsPassword="False" />
+
+                            <!-- Pressure Actual / Desired -->
+                            <Label Grid.Column="0"
+                                   Grid.Row="2"
+                                   x:Name="labelPressureCrnt"
+                                   Text="Pressure Current"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand" />
+                            <!--Entry Grid.Column="0" Grid.Row="4" x:Name="entryPressureCurrent" Placeholder="{Binding PressureCurrent}" Keyboard="Numeric" MaxLength="15" IsSpellCheckEnabled="True" IsTextPredictionEnabled="True" IsPassword="False" /-->
+
+                            <Label Grid.Column="1"
+                                   Grid.Row="2"
+                                   x:Name="labelPressureDsrd"
+                                   Text="Pressure Desired"
+                                   VerticalOptions="End"
+                                   HorizontalOptions="FillAndExpand" />
+                            <Entry Grid.Column="1"
+                                   Grid.Row="3"
+                                   x:Name="entryPressureDsrd"
+                                   Placeholder="{Binding PressureDesired}"
+                                   Keyboard="Numeric"
+                                   MaxLength="15"
+                                   IsSpellCheckEnabled="True"
+                                   IsTextPredictionEnabled="True"
+                                   IsPassword="False" />
+
+                            <!-- Dispense / Notify -->
+                            <Button x:Name="btnPourEn"
+                                    Grid.Column="0"
+                                    Grid.Row="4"
+                                    Text="Dispense"
+                                    BackgroundColor="LightGray"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPourBtnClicked" />
+
+                            <Button x:Name="btnPresEn"
+                                    Grid.Column="1"
+                                    Grid.Row="4"
+                                    Text="Pressurize"
+                                    BackgroundColor="LightGray"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="FillAndExpand"
+                                    Clicked="OnPressureBtnClicked" />
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

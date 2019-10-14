@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.673156" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.4.0" />
+    <PackageReference Include="Microsoft.Azure.Mobile.Client" Version="4.1.1" />
+    <PackageReference Include="Microsoft.Azure.Mobile.Client.SQLiteStore" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Framework\" />
+    <Folder Include="Pages\" />
+    <Folder Include="Pages\ManageKegs_Views\" />
+    <Folder Include="Database\" />
+    <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Pages\ManageKegs_Views\MyPage.xaml" />
+    <EmbeddedResource Remove="_ManageKegs.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Pages\ManageKegs_Views\MyPage.xaml.cs" />
+    <Compile Remove="Pages\_ManageKegs.xaml.cs" />
+    <Compile Remove="_ManageKegs.xaml.cs" />
+    <Compile Remove="Features\Database\KegDBConstants.cs" />
+    <Compile Remove="Features\CustomEntry.cs" />
+  </ItemGroup>
+</Project>
