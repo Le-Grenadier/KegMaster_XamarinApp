@@ -8,7 +8,7 @@
     ios:Page.UseSafeArea="true">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Log-In to continue" VerticalOptions="Start" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
+            <Label Text="Keg Master" VerticalOptions="Start" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" />
             <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
             <StackLayout x:Name="slUser" IsVisible="False" Padding="5,10">
                 <StackLayout Orientation="Horizontal">
@@ -29,10 +29,9 @@
                 </StackLayout>
             <Button x:Name="btnManageBeverage" Text="Manage Kegs" Clicked="OnManageKegs" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
-            <Button x:Name="btnResetPassword" Text="Reset Password" Clicked="OnResetPassword" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
-            <Button x:Name="btnEditProfile" Text="Edit Profile" Clicked="OnEditProfile" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
-            <Button x:Name="btnCallApi" Text="Call API" Clicked="OnCallApi" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="OnSignInSignOut" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Button x:Name="btnEditProfile" Text="Edit Profile" Clicked="OnEditProfile" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            <Button x:Name="btnResetPassword" Text="Reset Password" Clicked="OnResetPassword" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>
