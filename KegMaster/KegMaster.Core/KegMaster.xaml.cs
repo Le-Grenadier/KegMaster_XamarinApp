@@ -35,9 +35,9 @@ namespace KegMaster.Core
 
             manager = ConnectionManager.DefaultManager;
             /* Meter rate of Db access */
-            MessagingCenter.Subscribe<ContentPage, KegItem>(this, "KegItem_KegUpdate", async (sender, arg) => { updatedKeg = arg; kegUpdateDelay = 2; });
-            MessagingCenter.Subscribe<ContentPage, string>(this, "KegItem_PushEmbeddedUpdate", async (sender, arg) => { rowItem = arg; itemUpdateDelay = 2; });
-            Device.StartTimer(TimeSpan.FromSeconds(10), () => { DataSyncBackground(); return true; });// return true to repeat counting, false to stop timer
+            MessagingCenter.Subscribe<ContentPage, KegItem>(this, "KegItem_KegUpdate", async (sender, arg) => { updatedKeg = arg; kegUpdateDelay = 10; });
+            MessagingCenter.Subscribe<ContentPage, string>(this, "KegItem_PushEmbeddedUpdate", async (sender, arg) => { rowItem = arg; itemUpdateDelay = 10; });
+            Device.StartTimer(TimeSpan.FromSeconds(1), () => { DataSyncBackground(); return true; });// return true to repeat counting, false to stop timer
 
         }
 
@@ -56,7 +56,6 @@ namespace KegMaster.Core
          */
         protected override async void OnCurrentPageChanged()//(TabbedPage tab)
         {
-
             tabIdx = this.CurrentPage.TabIndex;
             await DataNotifyTab(tabIdx);
         }
@@ -75,16 +74,6 @@ namespace KegMaster.Core
         private async Task DataSyncBackground()
         {
             Exception error = null;
-
-            kegUpdateDelay--;
-            if (0 == kegUpdateDelay && updatedKeg != null)
-            {
-                //await this.DataPush(updatedKeg);
-                //updatedKeg = null;
-
-                /* Not sure this is needed */
-                await this.DataFetch(syncKegs: true);
-            }
 
             itemUpdateDelay--;
             if (0 == itemUpdateDelay && rowItem != null)
@@ -109,6 +98,20 @@ namespace KegMaster.Core
                     await DisplayAlert("There was an error", error.Message, "OK");
                 }
             }
+
+            kegUpdateDelay--;
+            if (0 == kegUpdateDelay && updatedKeg != null)
+            {
+                var item = kegs.FirstOrDefault(i => i.TapNo == this.tabIdx);
+                if (item != null)
+                {
+                    item = updatedKeg;
+                }
+                await DataNotifyTab(this.tabIdx);
+
+                await this.DataFetch(syncKegs: true);
+            }
+
         }
 
         /*
@@ -117,7 +120,7 @@ namespace KegMaster.Core
         async Task DataFetch(bool syncKegs)
         {
             this.kegs = await manager.GetActiveKegsAsync(syncKegs);
-            DataNotifyTab(this.tabIdx);
+            await DataNotifyTab(this.tabIdx);
         }
 
         /*

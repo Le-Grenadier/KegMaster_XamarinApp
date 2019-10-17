@@ -38,7 +38,7 @@
                                HorizontalOptions="FillAndExpand" />
                         <Entry x:Name="entryKegStyle"
                                Placeholder="{Binding Style}"
-                               MaxLength="25"
+                               MaxLength="250"
                                IsSpellCheckEnabled="True"
                                IsTextPredictionEnabled="True"
                                IsPassword="False" />
@@ -51,7 +51,7 @@
                                HorizontalOptions="FillAndExpand" />
                         <Entry x:Name="entryDescription"
                                Placeholder="{Binding Description}"
-                               MaxLength="15"
+                               MaxLength="250"
                                IsSpellCheckEnabled="True"
                                IsTextPredictionEnabled="True"
                                IsPassword="False" />

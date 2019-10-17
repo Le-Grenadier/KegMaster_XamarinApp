@@ -55,7 +55,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
         public async Task ItemChanged(string key, string value)
         {
-            //MessagingCenter.Send<ContentPage, KegItem>(this, "KegItem_KegUpdate", updatedKeg );
+            MessagingCenter.Send<ContentPage, KegItem>(this, "KegItem_KegUpdate", updatedKeg );
             MessagingCenter.Send<ContentPage, string>(this, "KegItem_PushEmbeddedUpdate", string.Format("Id:\"{0}\", TapNo:{1}, qrySelect:\"{2}\", qryValue:\"{3}\"", kegTapData.Id.ToString(), kegTapData.TapNo.ToString(), key, value));
         }
 
