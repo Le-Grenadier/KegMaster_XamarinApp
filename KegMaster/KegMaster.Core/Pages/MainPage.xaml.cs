@@ -111,7 +111,6 @@ namespace KegMaster.Core
             var isSignedIn = userContext.IsLoggedOn;
             btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
             btnEditProfile.IsVisible = isSignedIn;
-            btnCallApi.IsVisible = isSignedIn;
             slUser.IsVisible = isSignedIn;
             lblApi.Text = "";
         }
