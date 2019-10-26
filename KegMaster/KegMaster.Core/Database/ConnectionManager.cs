@@ -65,13 +65,13 @@ namespace KegMaster.Core.Database
         /*
          * Async Query for Active KegItems
          */
-        public async Task<ObservableCollection<KegItem>> GetActiveKegsAsync(bool syncItems = false)
+        public async Task<KegItem> GetActiveKegAsync(int tapNo = 0)
         {
             try
             {
-                IEnumerable<KegItem> items = await kegTable.ToEnumerableAsync();
-
-                return new ObservableCollection<KegItem>(items);
+				//TODO: Find more elegant way of doing this
+				IEnumerable<KegItem> item = await kegTable.Take(1).Where(tap => tap.TapNo == tapNo).ToListAsync();
+                return new ObservableCollection<KegItem>(item)[0];
             }
             catch (MobileServiceInvalidOperationException msioe)
             {

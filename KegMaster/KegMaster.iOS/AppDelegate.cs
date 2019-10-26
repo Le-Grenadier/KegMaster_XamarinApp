@@ -26,8 +26,15 @@ namespace KegMaster.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            // Initialize Azure Mobile Apps
-            CurrentPlatform.Init();
+			//Register Syncfusion license
+			Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MTYxNTU5QDMxMzcyZTMzMmUzMGFhcEI1TkZaQUdUMUw0WkdyRlBlSlgzQmJ0Rmo4RGxVaDBpMmYxSEt2ams9");
+
+			Syncfusion.SfGauge.XForms.iOS.SfGaugeRenderer.Init();//CircularGauge
+            Syncfusion.SfGauge.XForms.iOS.SfLinearGaugeRenderer.Init();//Lineargauge
+            Syncfusion.SfGauge.XForms.iOS.SfDigitalGaugeRenderer.Init();//DigitalGauge
+
+			// Initialize Azure Mobile Apps
+			CurrentPlatform.Init();
 
             // Initialize Xamarin Forms
             Forms.Init();

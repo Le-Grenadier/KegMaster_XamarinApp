@@ -27,8 +27,8 @@
                     <Label Text="API Payload " FontAttributes="Bold" />
                     <Label x:Name="lblApi" />
                 </StackLayout>
-            <Button x:Name="btnManageBeverage" Text="Manage Kegs" Clicked="OnManageKegs" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
+            <Button x:Name="btnManageBeverage" Text="Manage Kegs" Clicked="OnManageKegs" VerticalOptions="End" HorizontalOptions="FillAndExpand" IsVisible="false"/>
             <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="OnSignInSignOut" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             <Button x:Name="btnEditProfile" Text="Edit Profile" Clicked="OnEditProfile" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
             <Button x:Name="btnResetPassword" Text="Reset Password" Clicked="OnResetPassword" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>

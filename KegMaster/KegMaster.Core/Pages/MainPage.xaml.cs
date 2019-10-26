@@ -28,7 +28,7 @@ namespace KegMaster.Core
 
         async void OnManageKegs(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new KegMaster());
+            await Navigation.PushAsync(new KegMaster_pgView());
         }
 
         async void OnSignInSignOut(object sender, EventArgs e)
@@ -113,6 +113,8 @@ namespace KegMaster.Core
             btnEditProfile.IsVisible = isSignedIn;
             slUser.IsVisible = isSignedIn;
             lblApi.Text = "";
+
+            btnManageBeverage.IsVisible = isSignedIn ? true : false;
         }
         public void UpdateUserInfo(UserContext userContext)
         {

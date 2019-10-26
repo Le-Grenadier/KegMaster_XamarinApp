@@ -7,6 +7,7 @@ namespace KegMaster.Core.Database
 {
     public class KegItem
     {
+		/* Database values */
         string id;
         string alerts;
         int tapNo;
@@ -71,5 +72,10 @@ namespace KegMaster.Core.Database
         [JsonProperty(PropertyName = "TapNo")]
         public int TapNo { get { return tapNo; } set { tapNo = value; } }
         [Version]        public string Version { get; set; }
-    }
+
+
+		/* My special values specific to implimentation of this app */
+		[JsonProperty(PropertyName = "QtyCaution")]
+		public float QtyCaution { get { return qtyReserve * 2.0f; } }
+	}
 }

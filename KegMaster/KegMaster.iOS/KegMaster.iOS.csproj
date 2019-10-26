@@ -178,6 +178,24 @@
     <Reference Include="Microsoft.Identity.Client">
       <HintPath>..\..\packages\Microsoft.Identity.Client.4.4.0\lib\xamarinios10\Microsoft.Identity.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Licensing">
+      <HintPath>..\..\packages\Syncfusion.Licensing.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core.XForms">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core.XForms.iOS">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.Core.XForms.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGauge.iOS">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfGauge.IOS.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfGauge.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGauge.XForms">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfGauge.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfGauge.XForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfGauge.XForms.iOS">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfGauge.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfGauge.XForms.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KegMaster.Core\KegMaster.Core.csproj">

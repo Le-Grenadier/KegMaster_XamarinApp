@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
+             x:Class="KegMaster.Core.KegMaster_pgView">
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <ListView x:Name="MyListView" ItemsSource="{Binding Items}"
+                                          ItemTapped="Handle_ItemTapped"
+                                          CachingStrategy="RecycleElement"
+                                          VerticalOptions="FillAndExpand"
+                                          HorizontalOptions="FillAndExpand"
+                                          RowHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                        <Grid Padding="10" RowSpacing="5" ColumnSpacing="5" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Grid.Column="0" FontSize="Title" Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
+                            <Label Grid.Row="1" Grid.Column="0" FontSize="Subtitle" Text="{Binding Style}"  Style="{DynamicResource ListItemTextStyle}" />
+                            <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                                <gauge:SfCircularGauge HeightRequest="150">
+                                    <gauge:SfCircularGauge.Scales>
+                                        <gauge:Scale StartAngle="180" SweepAngle="180" Interval="10"
+                                                     StartValue="0" EndValue="30">
+                                            <gauge:Scale.Ranges>
+                                                <gauge:Range StartValue="0" EndValue="{Binding QtyReserve}" Color="Red"></gauge:Range>
+                                                <gauge:Range StartValue="{Binding QtyReserve}" EndValue="{Binding QtyCaution}" Color="Orange"></gauge:Range>
+                                                <gauge:Range StartValue="{Binding QtyCaution}" EndValue="18" Color="Green"></gauge:Range>
+                                            </gauge:Scale.Ranges>
+                                            <gauge:Scale.Pointers>
+                                                <gauge:MarkerPointer Value="{Binding PressureCrnt}" EnableAnimation="True" AnimationDuration="3"
+                                                                     Color="DarkOrange" MarkerHeight="10" MarkerWidth="10" Offset="1" />
+                                                <gauge:MarkerPointer Value="{Binding PressureDsrd}" EnableAnimation="True" AnimationDuration="3"
+                                                                     Color="Cyan" MarkerHeight="12" MarkerWidth="12" Offset="1" />
+                                                <gauge:NeedlePointer Value="{Binding QtyAvailable}" EnableAnimation="True" AnimationDuration="3" />
+                                            </gauge:Scale.Pointers>
+                                        </gauge:Scale>
+                                    </gauge:SfCircularGauge.Scales>
+                                </gauge:SfCircularGauge>
+
+                            </StackLayout>
+                        </Grid>
+                            </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <StackLayout x:Name="DisplayLoading" IsVisible="False" Padding="12" 
+                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                 AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+            <ActivityIndicator x:Name="activityIndicator" IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+        </StackLayout>
+        
+    </AbsoluteLayout>
+
+</ContentPage>
