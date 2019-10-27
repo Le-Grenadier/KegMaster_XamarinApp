@@ -93,15 +93,13 @@
                                    Text="Qty Remain:"
                                    VerticalOptions="End"
                                    HorizontalOptions="FillAndExpand" />
-                            <Entry Grid.Column="0"
+                            <Label Grid.Column="0"
                                    Grid.Row="1"
                                    x:Name="entryQtyRemain"
-                                   Placeholder="{Binding QtyRemain}"
-                                   Keyboard="Numeric"
-                                   MaxLength="15"
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   IsPassword="False" />
+                                   Text="{Binding QtyRemain}"
+                                   TranslationX="5"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand" />
 
                             <!-- Qty Reserve-->
                             <Label Grid.Column="1"
@@ -127,9 +125,11 @@
                                    Text="Pressure Current"
                                    VerticalOptions="End"
                                    HorizontalOptions="FillAndExpand" />
-                            <Label Grid.Column="0" Grid.Row="4"
+                            <Label Grid.Column="0" Grid.Row="3"
                                    x:Name="entryPressureCurrent"
-                                   VerticalOptions="End"
+                                   Text="{Binding PressureCrnt}"
+                                   TranslationX="5"
+                                   VerticalOptions="Center"
                                    HorizontalOptions="FillAndExpand" />
 
                             <Label Grid.Column="1"
