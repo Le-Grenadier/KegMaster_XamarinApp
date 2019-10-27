@@ -65,14 +65,6 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
 		{
-			if (this.kegTapData.Id == null) {
-				this.kegTapData.Name = "";
-				this.kegTapData.Description = "";
-				this.kegTapData.Style = "";
-				Task t = manager.CreateKegAsync(this.kegTapData);
-				t.RunSynchronously();
-			}
-
 			this.kegTapData.Name = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
 			this.kegTapData.Style = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
 			this.kegTapData.Description = await updateColumnString("Description", this.kegTapData.Description, this.entryDescription.Text);
@@ -96,8 +88,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			
 			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
 
-			RefreshData();
-
+		    RefreshData();
 		}
 
 		async Task<bool> updateColumnBool(string key, bool current, bool challenge)
@@ -126,10 +117,10 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		async Task<DateTime> updateColumnDateTime(string key, DateTime current, DateTime challenge)
 		{
 			DateTime ret = current;
-			// Ignore time, only compare date
+
 			if( (current.Year != challenge.Year)
-		      ||(current.Month != challenge.Month)
-			  ||(current.Day != challenge.Day) ){
+		     || (current.Month != challenge.Month)
+			 || (current.Day != challenge.Day) ){
 				await updateColumn_sendToDb(key, challenge.ToString());
 				ret = challenge;
 			}
@@ -139,8 +130,13 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		async Task<string> updateColumnString(string key, string current, string challenge)
 		{
 			string ret = current;
+			if (challenge == null) {
+				return ret;
+			}
 
-			if (!current.Equals(challenge)) {
+			// Ignore time, only compare date
+			if( (current == null && challenge != null)
+			  ||(!current.Equals(challenge))) {
 				await updateColumn_sendToDb(key, challenge);
 				ret = challenge;
 			}

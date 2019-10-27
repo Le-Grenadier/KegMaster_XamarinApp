@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
-
 
 namespace KegMaster.Core.Database
 {
@@ -16,10 +16,12 @@ namespace KegMaster.Core.Database
         MobileServiceClient client;
 
         IMobileServiceTable<KegItem> kegTable;
+
         /* TODO
-         * IMobileServiceTable<UserItem> userTable;
-         * IMobileServiceTable<PourItem> PourTable;
-         * IMobileServiceTable<ReviewItem> reviewTable;
+         * Log Users;
+         * Logg Pours;
+         * Reviews;
+		 * Recipes
          */
 
         /*
@@ -32,12 +34,9 @@ namespace KegMaster.Core.Database
 
             this.kegTable = client.GetTable<KegItem>();
 
-            this.client = new MobileServiceClient(Constants.ApplicationURL);            var path = Path.Combine(MobileServiceClient.DefaultDatabasePath, "KegItem.dbo");            var store = new MobileServiceSQLiteStore(path);
+            this.client = new MobileServiceClient(Constants.ApplicationURL);            var path = Path.Combine(MobileServiceClient.DefaultDatabasePath, "KegItems.dbo");            var store = new MobileServiceSQLiteStore(path);
 
-            //store.DefineTable
-
-            this.client.SyncContext.InitializeAsync(store);            //kegTable = this.client.GetSyncTable<KegItem>();
-        }
+            this.client.SyncContext.InitializeAsync(store);        }
 
         /*
          * Get/Set connection manager instance

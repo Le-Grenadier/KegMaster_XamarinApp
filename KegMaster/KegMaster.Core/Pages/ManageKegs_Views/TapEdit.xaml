@@ -11,7 +11,7 @@
                 <BoxView Color="Transparent"
                          HorizontalOptions="FillAndExpand"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"
-                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.5}"/>
+                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"/>
                 <StackLayout x:Name="slKeg"
                              Padding="20,5,20,5">
                     <Grid HorizontalOptions="FillAndExpand">
@@ -166,7 +166,9 @@
                                     Grid.Row="6"
                                     Grid.ColumnSpan="2"
                                     Text="Update Keg"
-                                    BackgroundColor="LightGray"
+                                    BackgroundColor="LightBlue"
+                                    TextColor="Black"
+                                    FontAttributes="Bold"
                                     VerticalOptions="End"
                                     HorizontalOptions="FillAndExpand"
                                     Clicked="OnUpdateBtnClicked" />

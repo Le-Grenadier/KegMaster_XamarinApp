@@ -28,7 +28,7 @@ namespace KegMaster.Core
 			InitializeComponent();
 
 			MessagingCenter.Subscribe<TapEdit, KegItem>(this, "KegItem_Updated", (sender, arg) => {
-				if (arg.TapNo > kegs.Count) {
+				if (arg.TapNo >= kegs.Count) {
 					kegs.Add(arg);
 				} else {
 					kegs.RemoveAt(arg.TapNo);
@@ -89,12 +89,14 @@ namespace KegMaster.Core
         }
 
 		/*----------------------------------------------------------------------
-		Add Keg
+		Create Keg
 		----------------------------------------------------------------------*/
 		async void OnAddKegBtnClicked(object sender, EventArgs args)
 		{
 			KegItem keg = new KegItem();
 			keg.TapNo = numTaps;
+			await manager.CreateKegAsync(keg);
+
 			numTaps++;
 			enableDelete = numTaps > 0;
 
@@ -107,7 +109,7 @@ namespace KegMaster.Core
 		----------------------------------------------------------------------*/
 		async void OnRemoveKegBtnClicked(object sender, EventArgs args)
 		{
-			string s = await DisplayActionSheet(string.Format("Kegs must be deleted in reverse order. \nDelete Keg {0}?", numTaps), "Cancel", "Delete Keg");
+			string s = await DisplayActionSheet(string.Format("Kegs must be deleted in descending order. \nDelete Keg {0}?", numTaps), "Cancel", "Delete Keg");
 			if( s.Contains("Delete") && kegs.Count >= numTaps) {
 				await manager.DeleteKegAsync(kegs[numTaps - 1]);
 
