@@ -46,6 +46,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
             this.entryQtyReserve.Text = this.kegTapData.QtyReserve.ToString("N2");
             this.btnPourEn.Text = string.Format("{0}", this.kegTapData.PourEn ? "Lock Tap" : "Unlock Tap");
             this.btnPresEn.Text = string.Format("{0}", this.kegTapData.PressureEn ? "Turn CO2 Off" : "Turn CO2 On");
+
+			PageLoading.IsVisible = false;
+			PageContent.IsVisible = true;
 		}
 
 		/*
@@ -68,6 +71,8 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
 		{
+			PageLoading.IsVisible = true;
+			PageContent.IsVisible = false;
 			this.kegTapData.Name = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
 			this.kegTapData.Style = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
 			this.kegTapData.Description = await updateColumnString("Description", this.kegTapData.Description, this.entryDescription.Text);
@@ -91,7 +96,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			
 			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
 
-		    RefreshData();
+			await Navigation.PopAsync();
 		}
 
 		async Task<bool> updateColumnBool(string key, bool current, bool challenge)

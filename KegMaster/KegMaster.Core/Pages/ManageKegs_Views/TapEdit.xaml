@@ -9,6 +9,10 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
+                <StackLayout x:Name="PageLoading" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center">
+                        <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black"/>
+                </StackLayout>
+            <StackLayout x:Name="PageContent" IsVisible="False">
                 <BoxView Color="Transparent"
                          HorizontalOptions="FillAndExpand"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"
@@ -167,8 +171,8 @@
                                     Grid.Row="6"
                                     Grid.ColumnSpan="2"
                                     Text="Update Keg"
-                                    BackgroundColor="LightBlue"
-                                    TextColor="Black"
+                                    BackgroundColor="IndianRed"
+                                    TextColor="NavajoWhite"
                                     FontAttributes="Bold"
                                     VerticalOptions="End"
                                     HorizontalOptions="FillAndExpand"
@@ -177,6 +181,8 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
+            </StackLayout>
+
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>
