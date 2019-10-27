@@ -31,11 +31,11 @@ namespace KegMaster.Core.Database
 		/* Constructor - These values cannot be null when inserting data */
 		public KegItem()
 		{
-			this.TapNo = 0;
+			this.TapNo = -1;
 			this.Id = Guid.NewGuid().ToString("N");
 			this.DateAvail = DateTime.Now;
 			this.DateKegged = DateTime.Now;
-			this.CreatedAt = DateTimeOffset.Now.ToString();
+			this.CreatedAt = null;
 			this.Deleted = "False";
 		}
 		/*

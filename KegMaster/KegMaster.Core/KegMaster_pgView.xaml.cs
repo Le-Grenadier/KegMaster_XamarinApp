@@ -95,7 +95,6 @@ namespace KegMaster.Core
 		{
 			KegItem keg = new KegItem();
 			keg.TapNo = numTaps;
-			await manager.CreateKegAsync(keg);
 
 			numTaps++;
 			enableDelete = numTaps > 0;

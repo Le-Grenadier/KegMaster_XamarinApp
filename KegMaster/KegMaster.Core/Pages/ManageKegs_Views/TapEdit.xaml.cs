@@ -71,6 +71,12 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		{
 			PageLoading.IsVisible = true;
 			PageContent.IsVisible = false;
+
+			if(this.kegTapData.CreatedAt == null) {
+				this.kegTapData.CreatedAt = DateTimeOffset.Now.ToString();
+				await manager.CreateKegAsync(this.kegTapData);
+			}
+
 			this.kegTapData.Name = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
 			this.kegTapData.Style = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
 			this.kegTapData.Description = await updateColumnString("Description", this.kegTapData.Description, this.entryDescription.Text);
