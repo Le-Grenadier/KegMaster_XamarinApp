@@ -34,7 +34,8 @@
                                         <gauge:Header Text="Pints" ForegroundColor="Black" Position="0.3,0.625"></gauge:Header>
                                     </gauge:SfCircularGauge.Headers>
                                     <gauge:SfCircularGauge.Scales>
-                                        <gauge:Scale StartAngle="180" SweepAngle="90" MinorTicksPerInterval="4" Interval="10"
+                                        <gauge:Scale StartAngle="180" SweepAngle="90"
+                                                     MinorTicksPerInterval="4" Interval="10"
                                                      StartValue="0" EndValue="40">
                                             <gauge:Scale.Ranges>
                                                 <gauge:Range Offset="0.6" Thickness="8" StartValue="0" EndValue="{Binding QtyReserve}" Color="Red"></gauge:Range>
@@ -53,16 +54,16 @@
                                     <gauge:LinearHeader Text="PSI"  Offset="0.5,0.82"/>
                                 </gauge:SfLinearGauge.Header>
                                     <gauge:SfLinearGauge.Scales>
-                                        <gauge:LinearScale ScaleBarColor="LightGray" CornerRadius="3" CornerRadiusType="Both" ScaleBarSize="14" ScaleBarLength="75" MinimumValue ="0" MaximumValue="40" LabelOffset="-5" MinorTicksPerInterval="1" Offset="10" LabelColor="#424242">
+                                        <gauge:LinearScale ScaleBarColor="LightGray" CornerRadius="3" CornerRadiusType="Both" ScaleBarSize="14" ScaleBarLength="75" MinimumValue ="0" MaximumValue="25" LabelOffset="-5" Interval="5" MinorTicksPerInterval="4" Offset="10" LabelColor="#424242">
                                         <gauge:LinearScale.MajorTickSettings>
                                             <gauge:LinearTickSettings Thickness="1" Length= "10" Color="Gray"/>
                                         </gauge:LinearScale.MajorTickSettings>
                                         <gauge:LinearScale.MinorTickSettings>
-                                            <gauge:LinearTickSettings Thickness="1" Length="7" Color="Gray"/>
+                                            <gauge:LinearTickSettings Thickness="1" Length="4" Color="LightGray"/>
                                         </gauge:LinearScale.MinorTickSettings>
                                         <gauge:LinearScale.Pointers>
                                             <gauge:BarPointer    Thickness="8" Color="RoyalBlue" Value="{Binding PressureCrnt}" EnableAnimation = "True"/>
-                                            <gauge:SymbolPointer Thickness="4" Color="CadetBlue" Value ="{Binding PressureDsrd}" EnableAnimation ="True" Offset="-2" />
+                                            <gauge:SymbolPointer Thickness="5" Color="CadetBlue" Value ="{Binding PressureDsrd}" EnableAnimation ="True" Offset="-3" />
                                         </gauge:LinearScale.Pointers>
                                     </gauge:LinearScale>
                                 </gauge:SfLinearGauge.Scales>
