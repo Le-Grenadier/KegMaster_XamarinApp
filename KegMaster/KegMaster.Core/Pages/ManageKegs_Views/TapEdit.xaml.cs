@@ -56,8 +56,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
          */
 		void OnPressureBtnClicked(object sender, EventArgs args)
         {
-            this.kegTapData.PressureEn = !this.kegTapData.PressureEn;
-			this.btnPresEn.Text = string.Format("{0}", this.kegTapData.PressureEn ? "Turn CO2 Off" : "Turn CO2 On");
+			this.btnPresEn.Text = string.Format("{0}", this.btnPresEn.Text.ToLower().Equals("turn co2 on") ? "Turn CO2 Off" : "Turn CO2 On");
 		}
 
 		/*
@@ -65,8 +64,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
          */
 		void OnPourBtnClicked(object sender, EventArgs args)
         {
-            this.kegTapData.PourEn = !this.kegTapData.PourEn;
-			this.btnPourEn.Text = string.Format("{0}", this.kegTapData.PourEn ? "Lock Tap" : "Unlock Tap");
+			this.btnPourEn.Text = string.Format("{0}", this.btnPourEn.Text.ToLower().Equals("unlock tap") ? "Lock Tap" : "Unlock Tap");
 		}
 
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
@@ -89,8 +87,10 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData.PressureDsrd = await updateColumnFloat("PressureDsrd", this.kegTapData.PressureDsrd, f_pd);
 			this.kegTapData.QtyAvailable = await updateColumnFloat("QtyAvailable", this.kegTapData.QtyAvailable, f_qa);
 			this.kegTapData.QtyReserve = await updateColumnFloat("QtyReserve", this.kegTapData.QtyReserve, f_qr);
-			this.kegTapData.PourEn = await updateColumnBool("PourEn", this.kegTapData.PourEn, this.btnPourEn.Text.Equals("Lock Tap"));
-			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.Equals("Turn CO2 Off"));
+
+			/* These are a littl counter-intuitive, they display the opposite of the current state -- e.g. Pressure is 'on' if button displays 'off' */
+			this.kegTapData.PourEn = await updateColumnBool("PourEn", this.kegTapData.PourEn, !this.btnPourEn.Text.ToLower().Contains("unlock"));
+			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.ToLower().Equals("turn co2 off"));
 
 			this.kegTapData = await manager.GetActiveKegAsync(this.kegTapData.TapNo);
 			
