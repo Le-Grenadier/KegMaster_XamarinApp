@@ -29,9 +29,9 @@
 
                             <AbsoluteLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
                                          VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" TranslationX="40">
-                                <gauge:SfCircularGauge HeightRequest="155" TranslationX="-40">
+                                <gauge:SfCircularGauge HeightRequest="155" TranslationX="-40" TranslationY="3">
                                     <gauge:SfCircularGauge.Headers>
-                                        <gauge:Header Text="Pints" ForegroundColor="Black" Position="0.3,0.651"></gauge:Header>
+                                        <gauge:Header Text="Pints" ForegroundColor="Black" Position="0.3,0.625"></gauge:Header>
                                     </gauge:SfCircularGauge.Headers>
                                     <gauge:SfCircularGauge.Scales>
                                         <gauge:Scale StartAngle="180" SweepAngle="90" MinorTicksPerInterval="4" Interval="10"
@@ -50,7 +50,7 @@
                                 </gauge:SfCircularGauge>
                             <gauge:SfLinearGauge Orientation="OrientationVertical" TranslationY="-35">
                                 <gauge:SfLinearGauge.Header >
-                                    <gauge:LinearHeader Text="PSI"  Offset="0.5,0.8"/>
+                                    <gauge:LinearHeader Text="PSI"  Offset="0.5,0.82"/>
                                 </gauge:SfLinearGauge.Header>
                                     <gauge:SfLinearGauge.Scales>
                                         <gauge:LinearScale ScaleBarColor="LightGray" CornerRadius="3" CornerRadiusType="Both" ScaleBarSize="14" ScaleBarLength="75" MinimumValue ="0" MaximumValue="40" LabelOffset="-5" MinorTicksPerInterval="1" Offset="10" LabelColor="#424242">
