@@ -112,15 +112,12 @@ namespace KegMaster.Core
             btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
             btnEditProfile.IsVisible = isSignedIn;
             slUser.IsVisible = isSignedIn;
-            lblApi.Text = "";
 
             btnManageBeverage.IsVisible = isSignedIn ? true : false;
         }
         public void UpdateUserInfo(UserContext userContext)
         {
             lblName.Text = userContext.Name;
-            lblJob.Text = userContext.JobTitle;
-            lblCity.Text = userContext.City;
         }
     }
 }
