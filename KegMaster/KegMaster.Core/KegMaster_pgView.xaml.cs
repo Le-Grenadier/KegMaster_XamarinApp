@@ -16,9 +16,10 @@ namespace KegMaster.Core
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class KegMaster_pgView : ContentPage
     {
-		ObservableCollection<KegItem> kegs = new ObservableCollection<KegItem>();
-		ConnectionManager manager;
-		bool isBusy;
+		private ObservableCollection<KegItem> kegs = new ObservableCollection<KegItem>();
+		private ConnectionManager manager = ConnectionManager.DefaultManager;
+		private int numTaps;
+		private bool enableDelete;
 
 		/* Constructor assumes kegs exist for each index up to n */
 		public KegMaster_pgView()
@@ -39,25 +40,28 @@ namespace KegMaster.Core
 
 			MyListView.ItemsSource = kegs;
 			MyListView.IsVisible = false;
-			manager = ConnectionManager.DefaultManager;
+			kegModBtns.IsVisible = false;
 			Task.Run(async() => await loadKegsBackground());
         }
 
 		async Task loadKegsBackground()
 		{
-			int idx = 0;
-			var keg = await getKeg(idx);
-			while (keg != null) {
+			numTaps = 0;
+			KegItem keg = await getKeg(numTaps);
+
+			while (keg != null)  {
+				enableDelete = true;
+
 				kegs.Add(keg);
 				OnPropertyChanged();
 
-				idx++;
-				keg = await getKeg(idx);
+				numTaps++;
+				keg = await getKeg(numTaps);
 			}
 
 			DisplayLoading.IsVisible = false;
 			MyListView.IsVisible = true;
-
+			kegModBtns.IsVisible = true;
 		}
 
 		/*----------------------------------------------------------------------
@@ -83,5 +87,34 @@ namespace KegMaster.Core
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }
-    }
+
+		/*----------------------------------------------------------------------
+		Add Keg
+		----------------------------------------------------------------------*/
+		async void OnAddKegBtnClicked(object sender, EventArgs args)
+		{
+			KegItem keg = new KegItem();
+			keg.TapNo = numTaps;
+			numTaps++;
+			enableDelete = numTaps > 0;
+
+			await Navigation.PushAsync(new Pages.ManageKegs_Views.TapEdit());
+			MessagingCenter.Send<KegMaster_pgView, KegItem>(this, "KegItem_EditContext", keg);
+		}
+
+		/*----------------------------------------------------------------------
+		Remove keg
+		----------------------------------------------------------------------*/
+		async void OnRemoveKegBtnClicked(object sender, EventArgs args)
+		{
+			string s = await DisplayActionSheet(string.Format("Kegs must be deleted in reverse order. \nDelete Keg {0}?", numTaps), "Cancel", "Delete Keg");
+			if( s.Contains("Delete") && kegs.Count >= numTaps) {
+				await manager.DeleteKegAsync(kegs[numTaps - 1]);
+
+				kegs.RemoveAt(numTaps - 1);
+				numTaps--;
+				enableDelete = numTaps > 0;
+			}
+		}
+	}
 }

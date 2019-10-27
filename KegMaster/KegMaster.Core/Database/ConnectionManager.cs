@@ -69,8 +69,7 @@ namespace KegMaster.Core.Database
         {
             try
             {
-				//TODO: Find more elegant way of doing this
-				IEnumerable<KegItem> item = await kegTable.Take(1).Where(tap => tap.TapNo == tapNo).ToListAsync();
+				IEnumerable<KegItem> item = await kegTable.Take(1).Where(tap => (tap.TapNo == tapNo)).ToListAsync();
                 return new ObservableCollection<KegItem>(item)[0];
             }
             catch (MobileServiceInvalidOperationException msioe)
@@ -116,11 +115,7 @@ namespace KegMaster.Core.Database
         {
             try
             {
-                if (item.Id == null)
-                {
-                    await this.kegTable.InsertAsync(item);
-                }
-                else
+                if (item != null)
                 {
                     await this.kegTable.UpdateAsync(item);
                 }
@@ -131,7 +126,35 @@ namespace KegMaster.Core.Database
             }
         }
 
-    }
+		/*
+		 * Async - New KegItem. Create a new entry if needed.
+		 */
+		public async Task CreateKegAsync(KegItem item)
+		{
+			try {
+				if (item != null) {
+					await this.kegTable.InsertAsync(item);
+				}
+			} catch (Exception e) {
+				Debug.WriteLine("Create error: {0}", new[] { e.Message });
+			}
+		}
+
+		/*
+		 * Async - Save KegItem. Create a new entry if needed.
+		 */
+		public async Task DeleteKegAsync(KegItem item)
+		{
+			try {
+				if (item != null) {
+					await this.kegTable.DeleteAsync(item);
+				}
+			} catch (Exception e) {
+				Debug.WriteLine("Save error: {0}", new[] { e.Message });
+			}
+		}
+
+	}
 
 
 }

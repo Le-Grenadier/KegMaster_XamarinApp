@@ -65,14 +65,22 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
 		{
-			this.kegTapData.Name        = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
-			this.kegTapData.Style       = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
+			if (this.kegTapData.Id == null) {
+				this.kegTapData.Name = "";
+				this.kegTapData.Description = "";
+				this.kegTapData.Style = "";
+				Task t = manager.CreateKegAsync(this.kegTapData);
+				t.RunSynchronously();
+			}
+
+			this.kegTapData.Name = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
+			this.kegTapData.Style = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
 			this.kegTapData.Description = await updateColumnString("Description", this.kegTapData.Description, this.entryDescription.Text);
-			this.kegTapData.DateKegged  = await updateColumnDateTime("DateKegged", this.kegTapData.DateKegged, this.startDatePicker.Date);
-			this.kegTapData.DateAvail   = await updateColumnDateTime("DateAvail", this.kegTapData.DateAvail, this.endDatePicker.Date);
+			this.kegTapData.DateKegged = await updateColumnDateTime("DateKegged", this.kegTapData.DateKegged, this.startDatePicker.Date);
+			this.kegTapData.DateAvail = await updateColumnDateTime("DateAvail", this.kegTapData.DateAvail, this.endDatePicker.Date);
 
 
-		    var f_pc = float.Parse(this.entryPressureCurrent.Text, CultureInfo.InvariantCulture.NumberFormat);
+			var f_pc = float.Parse(this.entryPressureCurrent.Text, CultureInfo.InvariantCulture.NumberFormat);
 			var f_pd = float.Parse(this.entryPressureDsrd.Text, CultureInfo.InvariantCulture.NumberFormat);
 			var f_qa = float.Parse(this.entryQtyRemain.Text, CultureInfo.InvariantCulture.NumberFormat);
 			var f_qr = float.Parse(this.entryQtyReserve.Text, CultureInfo.InvariantCulture.NumberFormat);
@@ -80,11 +88,12 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData.PressureCrnt = await updateColumnFloat("PressureCrnt", this.kegTapData.PressureCrnt, f_pc);
 			this.kegTapData.PressureDsrd = await updateColumnFloat("PressureDsrd", this.kegTapData.PressureDsrd, f_pd);
 			this.kegTapData.QtyAvailable = await updateColumnFloat("QtyAvailable", this.kegTapData.QtyAvailable, f_qa);
-			this.kegTapData.QtyReserve   = await updateColumnFloat("QtyReserve", this.kegTapData.QtyReserve, f_qr);
-			this.kegTapData.PourEn       = await updateColumnBool("PourEn", this.kegTapData.PourEn, this.btnPourEn.Text.Equals("Lock Tap"));
-			this.kegTapData.PressureEn   = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.Equals("Turn CO2 Off"));
+			this.kegTapData.QtyReserve = await updateColumnFloat("QtyReserve", this.kegTapData.QtyReserve, f_qr);
+			this.kegTapData.PourEn = await updateColumnBool("PourEn", this.kegTapData.PourEn, this.btnPourEn.Text.Equals("Lock Tap"));
+			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.Equals("Turn CO2 Off"));
 
 			this.kegTapData = await manager.GetActiveKegAsync(this.kegTapData.TapNo);
+			
 			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
 
 			RefreshData();
