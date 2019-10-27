@@ -11,43 +11,66 @@
                                           CachingStrategy="RecycleElement"
                                           VerticalOptions="FillAndExpand"
                                           HorizontalOptions="FillAndExpand"
-                                          RowHeight="100">
+                                          RowHeight="130">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                        <Grid Padding="10" RowSpacing="5" ColumnSpacing="5" >
+                        <Grid Padding="20,10,10,0" RowSpacing="5" ColumnSpacing="5" >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" />
+                                <ColumnDefinition Width="150" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.Column="0" FontSize="Title" Text="{Binding Name}" Style="{DynamicResource ListItemTextStyle}" />
-                            <Label Grid.Row="1" Grid.Column="0" FontSize="Subtitle" Text="{Binding Style}"  Style="{DynamicResource ListItemTextStyle}" />
-                            <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
-                                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                                <gauge:SfCircularGauge HeightRequest="150">
+                            <Label Grid.Row="0" Grid.Column="0" VerticalTextAlignment="End"    FontSize="Title"    Text="{Binding Name}"        LineBreakMode="TailTruncation" Style="{DynamicResource ListItemTextStyle}" />
+                            <Label Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" FontSize="Subtitle" Text="{Binding Style}"       LineBreakMode="TailTruncation" Style="{DynamicResource ListItemTextStyle}" />
+                            <Label Grid.Row="2" Grid.Column="0" VerticalTextAlignment="Start"  FontSize="Small"    Text="{Binding Description}" LineBreakMode="TailTruncation" Style="{DynamicResource ListItemTextStyle}" MaxLines="3" HeightRequest="40" />
+
+                            <AbsoluteLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="3"
+                                         VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" TranslationX="40">
+                                <gauge:SfCircularGauge HeightRequest="155" TranslationX="-40">
+                                    <gauge:SfCircularGauge.Headers>
+                                        <gauge:Header Text="Pints" ForegroundColor="Black" Position="0.3,0.651"></gauge:Header>
+                                    </gauge:SfCircularGauge.Headers>
                                     <gauge:SfCircularGauge.Scales>
-                                        <gauge:Scale StartAngle="180" SweepAngle="180" Interval="10"
-                                                     StartValue="0" EndValue="30">
+                                        <gauge:Scale StartAngle="180" SweepAngle="90" MinorTicksPerInterval="4" Interval="5"
+                                                     StartValue="0" EndValue="20">
                                             <gauge:Scale.Ranges>
-                                                <gauge:Range StartValue="0" EndValue="{Binding QtyReserve}" Color="Red"></gauge:Range>
-                                                <gauge:Range StartValue="{Binding QtyReserve}" EndValue="{Binding QtyCaution}" Color="Orange"></gauge:Range>
-                                                <gauge:Range StartValue="{Binding QtyCaution}" EndValue="18" Color="Green"></gauge:Range>
+                                                <gauge:Range Offset="0.6" Thickness="8" StartValue="0" EndValue="{Binding QtyReserve}" Color="Red"></gauge:Range>
+                                                <gauge:Range Offset="0.6" Thickness="8" StartValue="{Binding QtyReserve}" EndValue="{Binding QtyCaution}" Color="Orange"></gauge:Range>
+                                                <gauge:Range Offset="0.6" Thickness="8" StartValue="{Binding QtyCaution}" EndValue="{Binding QtyAvailable}" Color="Green"></gauge:Range>
+                                                <gauge:Range Offset="0.6" Thickness="8" StartValue="{Binding QtyAvailable}" EndValue="20" Color="Gray" ></gauge:Range>
                                             </gauge:Scale.Ranges>
                                             <gauge:Scale.Pointers>
-                                                <gauge:MarkerPointer Value="{Binding PressureCrnt}" EnableAnimation="True" AnimationDuration="3"
-                                                                     Color="DarkOrange" MarkerHeight="10" MarkerWidth="10" Offset="1" />
-                                                <gauge:MarkerPointer Value="{Binding PressureDsrd}" EnableAnimation="True" AnimationDuration="3"
-                                                                     Color="Cyan" MarkerHeight="12" MarkerWidth="12" Offset="1" />
-                                                <gauge:NeedlePointer Value="{Binding QtyAvailable}" EnableAnimation="True" AnimationDuration="3" />
+                                                <gauge:NeedlePointer Value="{Binding QtyAvailable}" EnableAnimation="True" AnimationDuration="3" LengthFactor="0.9" />
                                             </gauge:Scale.Pointers>
                                         </gauge:Scale>
                                     </gauge:SfCircularGauge.Scales>
                                 </gauge:SfCircularGauge>
+                            <gauge:SfLinearGauge Orientation="OrientationVertical" TranslationY="-35">
+                                <gauge:SfLinearGauge.Header >
+                                    <gauge:LinearHeader Text="PSI"  Offset="0.5,0.8"/>
+                                </gauge:SfLinearGauge.Header>
+                                    <gauge:SfLinearGauge.Scales>
+                                        <gauge:LinearScale ScaleBarColor="LightGray" CornerRadius="3" CornerRadiusType="Both" ScaleBarSize="11" ScaleBarLength="75" MinimumValue ="0" MaximumValue="40" LabelOffset="-5" MinorTicksPerInterval="1" Offset="10" LabelColor="#424242">
+                                        <gauge:LinearScale.MajorTickSettings>
+                                            <gauge:LinearTickSettings Thickness="1" Length= "10" Color="Gray"/>
+                                        </gauge:LinearScale.MajorTickSettings>
+                                        <gauge:LinearScale.MinorTickSettings>
+                                            <gauge:LinearTickSettings Thickness="1" Length="7" Color="Gray"/>
+                                        </gauge:LinearScale.MinorTickSettings>
+                                        <gauge:LinearScale.Pointers>
+                                            <gauge:BarPointer    Thickness="5" Color="RoyalBlue" Value="{Binding PressureCrnt}" EnableAnimation = "True"/>
+                                            <gauge:SymbolPointer Thickness="4" Color="CadetBlue" Value ="{Binding PressureDsrd}" EnableAnimation ="True" Offset="-2" />
+                                        </gauge:LinearScale.Pointers>
+                                    </gauge:LinearScale>
+                                </gauge:SfLinearGauge.Scales>
 
-                            </StackLayout>
+                             </gauge:SfLinearGauge>
+                        </AbsoluteLayout>
                         </Grid>
                             </ViewCell>
                     </DataTemplate>
