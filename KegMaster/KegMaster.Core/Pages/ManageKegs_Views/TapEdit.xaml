@@ -12,7 +12,7 @@
                 <StackLayout x:Name="PageLoading" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center">
                         <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black"/>
                 </StackLayout>
-            <StackLayout x:Name="PageContent" IsVisible="False">
+            <StackLayout x:Name="PageContent" IsVisible="True">
                 <BoxView Color="Transparent"
                          HorizontalOptions="FillAndExpand"
                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"
@@ -58,7 +58,8 @@
                                    MaxLength="250"
                                    IsSpellCheckEnabled="True"
                                    IsTextPredictionEnabled="True"
-                                   HeightRequest="100"/>
+                                   HeightRequest="100"
+                                   BackgroundColor="WhiteSmoke"/>
                         </StackLayout>
                     </Grid>
 
