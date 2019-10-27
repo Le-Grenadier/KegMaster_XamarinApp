@@ -85,12 +85,12 @@
                                     MinimumDate="{Binding Source={x:Reference startDatePicker}, Path=Date}" />
                     </StackLayout>
                     <StackLayout Orientation="Horizontal">
-                        <Grid HorizontalOptions="FillAndExpand">
+                        <Grid HorizontalOptions="FillAndExpand" Padding="0">
                             <!-- Qty Remaining -->
                             <Label Grid.Column="0"
                                    Grid.Row="0"
                                    x:Name="labelQtyRemain"
-                                   Text="Qty Remain:"
+                                   Text="Qty Current:"
                                    VerticalOptions="End"
                                    HorizontalOptions="FillAndExpand" />
                             <Label Grid.Column="0"
@@ -99,19 +99,21 @@
                                    Text="{Binding QtyRemain}"
                                    TranslationX="5"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="FillAndExpand" />
+                                   HorizontalOptions="FillAndExpand"/>
 
                             <!-- Qty Reserve-->
-                            <Label Grid.Column="1"
-                                   Grid.Row="0"
+                            <Label Grid.Column="0"
+                                   Grid.Row="2"
                                    x:Name="labelQtyReserve"
                                    Text="Qty Reserve:"
-                                   VerticalOptions="End"
+                                   VerticalOptions="Start"
                                    HorizontalOptions="FillAndExpand" />
-                            <Entry Grid.Column="1"
-                                   Grid.Row="1"
+                            <Entry Grid.Column="0"
+                                   Grid.Row="3"
                                    x:Name="entryQtyReserve"
                                    Placeholder="{Binding QtyReserve}"
+                                   VerticalOptions="Start"
+                                   TranslationY="-10"
                                    Keyboard="Numeric"
                                    MaxLength="15"
                                    IsSpellCheckEnabled="True"
@@ -119,29 +121,32 @@
                                    IsPassword="False" />
 
                             <!-- Pressure Actual / Desired -->
-                            <Label Grid.Column="0"
-                                   Grid.Row="2"
+                            <Label Grid.Column="1"
+                                   Grid.Row="0"
                                    x:Name="labelPressureCrnt"
                                    Text="Pressure Current"
                                    VerticalOptions="End"
                                    HorizontalOptions="FillAndExpand" />
-                            <Label Grid.Column="0" Grid.Row="3"
+                            <Label Grid.Column="1"
+                                   Grid.Row="1"
                                    x:Name="entryPressureCurrent"
                                    Text="{Binding PressureCrnt}"
                                    TranslationX="5"
                                    VerticalOptions="Center"
-                                   HorizontalOptions="FillAndExpand" />
+                                   HorizontalOptions="FillAndExpand"/>
 
                             <Label Grid.Column="1"
                                    Grid.Row="2"
                                    x:Name="labelPressureDsrd"
                                    Text="Pressure Desired"
-                                   VerticalOptions="End"
+                                   VerticalOptions="Start"
                                    HorizontalOptions="FillAndExpand" />
                             <Entry Grid.Column="1"
                                    Grid.Row="3"
                                    x:Name="entryPressureDsrd"
                                    Placeholder="{Binding PressureDesired}"
+                                   VerticalOptions="Start"
+                                   TranslationY="-10"
                                    Keyboard="Numeric"
                                    MaxLength="15"
                                    IsSpellCheckEnabled="True"
