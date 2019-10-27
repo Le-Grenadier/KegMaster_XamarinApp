@@ -29,6 +29,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
 		void RefreshData()
         {
+			/* Update page title */
+			Page.Title = string.Format("Edit Tap {0}", this.kegTapData.TapNo+1);
+
             /* Update ViewModel Data */
             this.entryKegName.Text = string.Format("{0}", this.kegTapData.Name);
             this.entryKegStyle.Text = string.Format("{0}", this.kegTapData.Style);
