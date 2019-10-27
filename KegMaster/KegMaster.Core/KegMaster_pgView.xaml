@@ -97,6 +97,10 @@
                  AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5">
             <ActivityIndicator x:Name="activityIndicator" IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
         </StackLayout>
+        <BoxView Color="Transparent"
+        HorizontalOptions="FillAndExpand"
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"/>
     </StackLayout>
 
         
