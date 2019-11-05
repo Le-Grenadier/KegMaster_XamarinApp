@@ -7,188 +7,236 @@
     Title="Edit Tap"
     Icon="icon.png">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView HorizontalOptions="CenterAndExpand" Padding="20,5,20,5" BackgroundColor="WhiteSmoke">
             <StackLayout>
-                <StackLayout x:Name="PageLoading" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center">
-                        <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black"/>
-                </StackLayout>
-            <StackLayout x:Name="PageContent" IsVisible="True">
-                <BoxView Color="Transparent"
-                         HorizontalOptions="FillAndExpand"
-                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.5}"
-                         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}"/>
-                <StackLayout x:Name="slKeg"
-                             Padding="20,5,20,5">
+                    <StackLayout x:Name="PageLoading" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center">
+                            <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black"/>
+                    </StackLayout>
+
+                <StackLayout x:Name="PageContent" IsVisible="True" HorizontalOptions="Center">
+                    <!-- Name / Style -->
                     <Grid HorizontalOptions="FillAndExpand">
                         <!-- Keg Name -->
-                        <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+                        <StackLayout Orientation="Vertical" Grid.Column="0">
                             <Label x:Name="labelKegName"
-                                   Text="Name:"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="FillAndExpand" />
+                                    Text="Name:"
+                                    HorizontalOptions="FillAndExpand" />
                             <Entry x:Name="entryKegName"
-                                   Placeholder="{Binding Name}"
-                                   MaxLength="25"
-                                   
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   IsPassword="False" />
+                                    Placeholder="{Binding Name}"
+                                    MaxLength="25"
+                                    IsSpellCheckEnabled="True"
+                                    IsTextPredictionEnabled="True"
+                                    IsPassword="False" 
+                                    Margin="20,0,0,0"/>
                         </StackLayout>
                         <!-- Style -->
-                        <StackLayout Orientation="Vertical" Grid.Row="0" Grid.Column="1">
+                        <StackLayout Orientation="Vertical" Grid.Column="1">
                             <Label x:Name="labelKegStyle"
-                                   Text="Style:"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="FillAndExpand" />
+                                    Text="Style:"
+                                    VerticalOptions="End"
+                                    HorizontalOptions="FillAndExpand" />
                             <Entry x:Name="entryKegStyle"
-                                   Placeholder="{Binding Style}"
-                                   MaxLength="250"
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   IsPassword="False" />
+                                    Placeholder="{Binding Style}"
+                                    MaxLength="250"
+                                    IsSpellCheckEnabled="True"
+                                    IsTextPredictionEnabled="True"
+                                    IsPassword="False" 
+                                    Margin="20,0,0,0"/>
                         </StackLayout>
+                    </Grid>
                     <!-- Description -->
-                        <StackLayout Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="2">
-                            <Label x:Name="labelDescription"
-                                   Text="Description:"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="FillAndExpand" />
-                            <Editor x:Name="entryDescription"
-                                   Placeholder="{Binding Description}"
-                                   MaxLength="250"
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   HeightRequest="100"
-                                   BackgroundColor="WhiteSmoke"/>
+                    <StackLayout Orientation="Vertical"
+                                    Margin="0,10,0,0">
+                        <Label x:Name="labelDescription"
+                                Text="Description:"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand" />
+                        <Editor x:Name="entryDescription"
+                                Placeholder="{Binding Description}"
+                                MaxLength="250"
+                                IsSpellCheckEnabled="True"
+                                IsTextPredictionEnabled="True"
+                                HeightRequest="100"
+                                Margin="20,0,0,0"/>
+                    </StackLayout>
+
+                    <!-- Horizontal Rule -->
+                    <BoxView Color="DarkGray"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="1"
+                            Margin="30, 20, 30, 20"/>
+
+                    <Grid>
+                        <!-- Date Kegged -->
+                        <StackLayout Grid.Row="0" Grid.Column="0">
+                            <Label x:Name="labelDateKegged"
+                                    Text="Date Kegged:"
+                                    HorizontalOptions="FillAndExpand" />
+                            <DatePicker x:Name="startDatePicker"
+                                        Format="ddd, MMM d, yyyy"
+                                        Margin="20, 0, 0, 5" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <Label x:Name="labelDateAvailable"
+                                    Text="Date Available:"
+                                    HorizontalOptions="FillAndExpand" />
+                            <DatePicker x:Name="endDatePicker"
+                                        Format="ddd, MMM d, yyyy"
+                                        Margin="20, 0, 0, 5"
+                                        MinimumDate="{Binding Source={x:Reference startDatePicker}, Path=Date}" />
+                        </StackLayout>
+                        </Grid>
+
+                        <Grid Padding="0,20,0,0">
+                        <StackLayout Grid.Row="0" Grid.Column="0">
+                                <!-- Pour Qty Glass -->
+                                <Label x:Name="labePourQtyGlass"
+                                        Text="Pour Ounces:"
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="FillAndExpand"
+                                        Margin="0, 0, 0, 7"  />
+                                <Entry x:Name="entryPourQtyGlass"
+                                        Placeholder="{Binding PourQtyGlass}"
+                                        VerticalOptions="Center"
+                                        TranslationY="-10"
+                                        Keyboard="Numeric"
+                                        MaxLength="15"
+                                        Margin="20, 0, 0, 7" />
+                        </StackLayout>
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <!-- Pour Qty Sample -->
+                            <Label x:Name="labelPourQtySample"
+                                    Text="Sample Ounces:"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="FillAndExpand"
+                                        Margin="0, 0, 0, 5" />
+                            <Entry x:Name="entryPourQtySample"
+                                    Placeholder="{Binding PourQtySample}"
+                                    VerticalOptions="End"
+                                    TranslationY="-10"
+                                    Keyboard="Numeric"
+                                    MaxLength="15"
+                                    Margin="20,0,0,10"/>
                         </StackLayout>
                     </Grid>
 
-                    <!-- Date Kegged -->
-                    <StackLayout Orientation="Vertical">
-                        <Label x:Name="labelDateKegged"
-                               Text="Date Kegged:"
-                               VerticalOptions="End"
-                               HorizontalOptions="FillAndExpand" />
-                        <DatePicker x:Name="startDatePicker"
-                                    Format="ddd, MMM d, yyyy"
-                                    Margin="30, 0, 0, 30" />
+                    <!-- Horizontal Rule -->
+                    <BoxView Color="DarkGray"
+                            HorizontalOptions="FillAndExpand"
+                            HeightRequest="1"
+                            Margin="30, 15, 30, 15"/>
+                
+                    
+                <Grid HorizontalOptions="FillAndExpand" Padding="0">
+
+                    <!-- Qty Remaining -->
+                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <Label x:Name="labelQtyRemain"
+                                Text="Qty Remaining:"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        <Label x:Name="entryQtyRemain"
+                                Text="{Binding QtyRemain}"
+                                VerticalOptions="Start"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="20,0,0,0"
+                                HeightRequest="30"
+                                TranslationX="5"/>
                     </StackLayout>
-                    <!-- Date Available -->
-                    <StackLayout Orientation="Vertical">
-                        <Label x:Name="labelDateAvailable"
-                               Text="Date Available:"
-                               VerticalOptions="End"
-                               HorizontalOptions="FillAndExpand" />
-                        <DatePicker x:Name="endDatePicker"
-                                    Format="ddd, MMM d, yyyy"
-                                    Margin="30, 0, 0, 30"
-                                    MinimumDate="{Binding Source={x:Reference startDatePicker}, Path=Date}" />
+
+                    <!-- Pressure Current -->
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <Label Grid.Row="0" Grid.Column="1"
+                                x:Name="labelPressureCrnt"
+                                Text="Pressure Current"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"/>
+                        <Label Grid.Row="1" Grid.Column="1"
+                                x:Name="entryPressureCurrent"
+                                Text="{Binding PressureCrnt}"
+                                VerticalOptions="Start"
+                                HorizontalOptions="FillAndExpand"
+                                Margin="20,0,0,0"
+                                HeightRequest="30"
+                                TranslationX="5"/>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <Grid HorizontalOptions="FillAndExpand" Padding="0">
-                            <!-- Qty Remaining -->
-                            <Label Grid.Column="0"
-                                   Grid.Row="0"
-                                   x:Name="labelQtyRemain"
-                                   Text="Qty Current:"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="FillAndExpand" />
-                            <Label Grid.Column="0"
-                                   Grid.Row="1"
-                                   x:Name="entryQtyRemain"
-                                   Text="{Binding QtyRemain}"
-                                   TranslationX="5"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="FillAndExpand"/>
+                </Grid>
+                <Grid>
+                    <!-- Qty Reserve-->
+                    <StackLayout Grid.Row="0" Grid.Column="0">
+                        <Label x:Name="labelQtyReserve"
+                                Text="Qty Reserve:"
+                                VerticalOptions="Start"
+                                HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="entryQtyReserve"
+                                Placeholder="{Binding QtyReserve}"
+                                VerticalOptions="Start"
+                                Keyboard="Numeric"
+                                MaxLength="15"
+                                IsSpellCheckEnabled="True"
+                                IsTextPredictionEnabled="True"
+                                IsPassword="False"
+                                Margin="20,0,0,0"
+                               Text="5"/>
+                    </StackLayout>
 
-                            <!-- Qty Reserve-->
-                            <Label Grid.Column="0"
-                                   Grid.Row="2"
-                                   x:Name="labelQtyReserve"
-                                   Text="Qty Reserve:"
-                                   VerticalOptions="Start"
-                                   HorizontalOptions="FillAndExpand" />
-                            <Entry Grid.Column="0"
-                                   Grid.Row="3"
-                                   x:Name="entryQtyReserve"
-                                   Placeholder="{Binding QtyReserve}"
-                                   VerticalOptions="Start"
-                                   TranslationY="-10"
-                                   Keyboard="Numeric"
-                                   MaxLength="15"
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   IsPassword="False" />
+                    <StackLayout Grid.Row="0" Grid.Column="1">
+                        <!-- Pressure Desired -->
+                        <Label x:Name="labelPressureDsrd"
+                                Text="Pressure Desired"
+                                VerticalOptions="Start"
+                                HorizontalOptions="FillAndExpand" />
+                        <Entry x:Name="entryPressureDsrd"
+                                Placeholder="{Binding PressureDesired}"
+                                VerticalOptions="Start"
+                                Keyboard="Numeric"
+                                MaxLength="15"
+                                IsSpellCheckEnabled="True"
+                                IsTextPredictionEnabled="True"
+                                IsPassword="False" 
+                                Margin="20,0,0,0"/>
+                    </StackLayout>
+                </Grid>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
+                        <!-- Dispense / Notify -->
+                        <Button x:Name="btnPourEn"
+                                Grid.Row="4" Grid.Column="0"
+                                Text="Unlock Tap"
+                                BackgroundColor="LightGray"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Clicked="OnPourBtnClicked"
+                                BorderColor="SlateGray"
+                                BorderWidth="1"/>
 
-                            <!-- Pressure Actual / Desired -->
-                            <Label Grid.Column="1"
-                                   Grid.Row="0"
-                                   x:Name="labelPressureCrnt"
-                                   Text="Pressure Current"
-                                   VerticalOptions="End"
-                                   HorizontalOptions="FillAndExpand" />
-                            <Label Grid.Column="1"
-                                   Grid.Row="1"
-                                   x:Name="entryPressureCurrent"
-                                   Text="{Binding PressureCrnt}"
-                                   TranslationX="5"
-                                   VerticalOptions="Center"
-                                   HorizontalOptions="FillAndExpand"/>
-
-                            <Label Grid.Column="1"
-                                   Grid.Row="2"
-                                   x:Name="labelPressureDsrd"
-                                   Text="Pressure Desired"
-                                   VerticalOptions="Start"
-                                   HorizontalOptions="FillAndExpand" />
-                            <Entry Grid.Column="1"
-                                   Grid.Row="3"
-                                   x:Name="entryPressureDsrd"
-                                   Placeholder="{Binding PressureDesired}"
-                                   VerticalOptions="Start"
-                                   TranslationY="-10"
-                                   Keyboard="Numeric"
-                                   MaxLength="15"
-                                   IsSpellCheckEnabled="True"
-                                   IsTextPredictionEnabled="True"
-                                   IsPassword="False" />
-
-                            <!-- Dispense / Notify -->
-                            <Button x:Name="btnPourEn"
-                                    Grid.Column="0"
-                                    Grid.Row="4"
-                                    Text="Unlock Tap"
-                                    BackgroundColor="LightGray"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="FillAndExpand"
-                                    Clicked="OnPourBtnClicked" />
-
-                            <Button x:Name="btnPresEn"
-                                    Grid.Column="1"
-                                    Grid.Row="4"
-                                    Text="Enable C02"
-                                    BackgroundColor="LightGray"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="FillAndExpand"
-                                    Clicked="OnPressureBtnClicked" />
-
-                            <Button x:Name="btnPresUpdt"
-                                    Grid.Column="0"
-                                    Grid.Row="6"
-                                    Grid.ColumnSpan="2"
-                                    Text="Update Keg"
-                                    BackgroundColor="IndianRed"
-                                    TextColor="NavajoWhite"
-                                    FontAttributes="Bold"
-                                    VerticalOptions="End"
-                                    HorizontalOptions="FillAndExpand"
-                                    Clicked="OnUpdateBtnClicked" />
-                        </Grid>
+                        <Button x:Name="btnPresEn"
+                                Grid.Row="4" Grid.Column="1"
+                                Text="Enable C02"
+                                BackgroundColor="LightGray"
+                                VerticalOptions="End"
+                                HorizontalOptions="FillAndExpand"
+                                Clicked="OnPressureBtnClicked"
+                                BorderColor="SlateGray"
+                                BorderWidth="1" />
+                    </StackLayout>
+                    <StackLayout Margin="0,20,0,0">
+                    <Button x:Name="btnPresUpdt"
+                            Grid.Row="6" Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Text="Update Keg"
+                            BackgroundColor="IndianRed"
+                            TextColor="NavajoWhite"
+                            FontAttributes="Bold"
+                            VerticalOptions="End"
+                            HorizontalOptions="FillAndExpand"
+                            Clicked="OnUpdateBtnClicked"
+                            BorderColor="DarkSlateGray"
+                            BorderWidth="1"/>
+                    </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-            </StackLayout>
-
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

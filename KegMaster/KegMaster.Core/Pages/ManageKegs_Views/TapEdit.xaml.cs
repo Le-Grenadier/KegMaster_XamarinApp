@@ -42,7 +42,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 
             this.entryPressureCurrent.Text = this.kegTapData.PressureCrnt.ToString("N2");
             this.entryPressureDsrd.Text = this.kegTapData.PressureDsrd.ToString("N2");
-            this.entryQtyRemain.Text = this.kegTapData.QtyAvailable.ToString("N2");
+			this.entryPourQtyGlass.Text = this.kegTapData.PourQtyGlass.ToString("N2");
+			this.entryPourQtySample.Text = this.kegTapData.PourQtySample.ToString("N2");
+			this.entryQtyRemain.Text = this.kegTapData.QtyAvailable.ToString("N2");
             this.entryQtyReserve.Text = this.kegTapData.QtyReserve.ToString("N2");
             this.btnPourEn.Text = string.Format("{0}", this.kegTapData.PourEn ? "Lock Tap" : "Unlock Tap");
             this.btnPresEn.Text = string.Format("{0}", this.kegTapData.PressureEn ? "Turn CO2 Off" : "Turn CO2 On");
@@ -80,10 +82,17 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData.Name = await updateColumnString("Name", this.kegTapData.Name, this.entryKegName.Text);
 			this.kegTapData.Style = await updateColumnString("Style", this.kegTapData.Style, this.entryKegStyle.Text);
 			this.kegTapData.Description = await updateColumnString("Description", this.kegTapData.Description, this.entryDescription.Text);
+
+			/* Date kegged/avail and Pour Qty */
 			this.kegTapData.DateKegged = await updateColumnDateTime("DateKegged", this.kegTapData.DateKegged, this.startDatePicker.Date);
 			this.kegTapData.DateAvail = await updateColumnDateTime("DateAvail", this.kegTapData.DateAvail, this.endDatePicker.Date);
+			var f_pg = float.Parse(this.entryPourQtyGlass.Text, CultureInfo.InvariantCulture.NumberFormat);
+			var f_ps = float.Parse(this.entryPourQtySample.Text, CultureInfo.InvariantCulture.NumberFormat);
 
+			this.kegTapData.PourQtyGlass = await updateColumnFloat("PourQtyGlass", this.kegTapData.PourQtyGlass, f_pg);
+			this.kegTapData.PourQtySample = await updateColumnFloat("PourQtySample", this.kegTapData.PourQtySample, f_ps);
 
+			/* Pressure and Qty */
 			var f_pc = float.Parse(this.entryPressureCurrent.Text, CultureInfo.InvariantCulture.NumberFormat);
 			var f_pd = float.Parse(this.entryPressureDsrd.Text, CultureInfo.InvariantCulture.NumberFormat);
 			var f_qa = float.Parse(this.entryQtyRemain.Text, CultureInfo.InvariantCulture.NumberFormat);

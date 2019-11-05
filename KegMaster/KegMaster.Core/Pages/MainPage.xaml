@@ -8,7 +8,7 @@
     ios:Page.UseSafeArea="true">
     <ContentPage.Content>
         <StackLayout>
-            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" />
             <StackLayout x:Name="slUser" IsVisible="False" Padding="5,10">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Name: " FontAttributes="Bold" />
