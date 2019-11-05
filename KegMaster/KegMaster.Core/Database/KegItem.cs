@@ -28,6 +28,10 @@ namespace KegMaster.Core.Database
 		float qtyAvailable;
 		float qtyReserve;
 
+		private static string noEntry = "⛔";
+		private static string greenCheck = "✅";
+		private static string fullMug = "🍺";
+		private static string prohibited = "🚫";
 		/* Constructor - These values cannot be null when inserting data */
 		public KegItem()
 		{
@@ -95,6 +99,20 @@ namespace KegMaster.Core.Database
 		/* My special values specific to implimentation of this app */
 		[JsonIgnoreAttribute]
 		public float QtyCaution { get { return qtyReserve * 2.0f; } }
+
+		[JsonIgnoreAttribute]
+		public string QtyLabel {
+			get {
+				return("Pints "+(this.PourEn ? fullMug : prohibited));
+			}
+		}
+
+		[JsonIgnoreAttribute]
+		public string PsiLabel {
+			get {
+				return("PSI "+(this.PressureEn ? greenCheck : noEntry));
+			}
+		}
 	}
 
 }

@@ -31,7 +31,7 @@
                                          VerticalOptions="StartAndExpand" HorizontalOptions="EndAndExpand" TranslationX="40">
                                 <gauge:SfCircularGauge HeightRequest="155" TranslationX="-40" TranslationY="3">
                                     <gauge:SfCircularGauge.Headers>
-                                        <gauge:Header Text="Pints" ForegroundColor="Black" Position="0.3,0.625"></gauge:Header>
+                                        <gauge:Header Text="{Binding QtyLabel}" ForegroundColor="Black" Position="0.3,0.625"></gauge:Header>
                                     </gauge:SfCircularGauge.Headers>
                                     <gauge:SfCircularGauge.Scales>
                                         <gauge:Scale StartAngle="180" SweepAngle="90"
@@ -51,7 +51,7 @@
                                 </gauge:SfCircularGauge>
                             <gauge:SfLinearGauge Orientation="OrientationVertical" TranslationY="-35">
                                 <gauge:SfLinearGauge.Header >
-                                    <gauge:LinearHeader Text="PSI"  Offset="0.5,0.82"/>
+                                    <gauge:LinearHeader Text="{Binding PsiLabel}"  Offset="0.5,0.82"/>
                                 </gauge:SfLinearGauge.Header>
                                     <gauge:SfLinearGauge.Scales>
                                         <gauge:LinearScale ScaleBarColor="LightGray" CornerRadius="3" CornerRadiusType="Both" ScaleBarSize="14" ScaleBarLength="75" MinimumValue ="0" MaximumValue="25" LabelOffset="-5" Interval="5" MinorTicksPerInterval="4" Offset="10" LabelColor="#424242">
