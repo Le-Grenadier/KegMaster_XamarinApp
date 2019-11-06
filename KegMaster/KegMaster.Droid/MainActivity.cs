@@ -15,7 +15,10 @@ namespace KegMaster.Droid
     [Activity(Label = "KegMaster", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+		public const string TAG = "MainActivity";
+		internal static readonly string CHANNEL_ID = "KegMaster_NotificationHub";
+
+		protected override void OnCreate(Bundle bundle)
         {
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -46,6 +49,8 @@ namespace KegMaster.Droid
             base.OnActivityResult(requestCode, resultCode, data);
             AuthenticationContinuationHelper.SetAuthenticationContinuationEventArgs(requestCode, resultCode, data);
         }
+
+
     }
 }
 

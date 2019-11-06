@@ -28,8 +28,7 @@ namespace KegMaster.Core.Database
 		float qtyAvailable;
 		float qtyReserve;
 
-		private static string noEntry = "⛔";
-		private static string greenCheck = "✅";
+		private static string puffLady = "🌬";
 		private static string fullMug = "🍺";
 		private static string prohibited = "🚫";
 		/* Constructor - These values cannot be null when inserting data */
@@ -110,7 +109,7 @@ namespace KegMaster.Core.Database
 		[JsonIgnoreAttribute]
 		public string PsiLabel {
 			get {
-				return("PSI "+(this.PressureEn ? greenCheck : noEntry));
+				return("PSI "+(this.PressureEn ? puffLady : prohibited));
 			}
 		}
 	}

@@ -30,7 +30,7 @@
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignKey>iPhone Developer: johngrenard@gmail.com (TPNJTRYR44)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>KegMasterProvisioningProfile</CodesignProvision>
     <CodesignExtraArgs />
     <CodesignResourceRules />
   </PropertyGroup>
@@ -61,7 +61,7 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignProvision>KegMasterProvisioningProfile</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -195,6 +195,9 @@
     </Reference>
     <Reference Include="Syncfusion.SfGauge.XForms.iOS">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfGauge.17.3.0.19\lib\Xamarin.iOS10\Syncfusion.SfGauge.XForms.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Azure.NotificationHubs.iOS">
+      <HintPath>..\..\packages\Xamarin.Azure.NotificationHubs.iOS.2.0.4\lib\xamarinios10\Xamarin.Azure.NotificationHubs.iOS.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
