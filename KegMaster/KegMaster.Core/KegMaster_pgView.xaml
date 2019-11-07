@@ -4,12 +4,14 @@
              xmlns:gauge="clr-namespace:Syncfusion.SfGauge.XForms;assembly=Syncfusion.SfGauge.XForms"
              x:Class="KegMaster.Core.KegMaster_pgView">
         <StackLayout Grid.Row="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" BackgroundColor="WhiteSmoke">
-            <ListView x:Name="MyListView" ItemsSource="{Binding Items}"
+            <ListView x:Name="MyListView" ItemsSource="{Binding kegs}"
                                           ItemTapped="Handle_ItemTapped"
                                           CachingStrategy="RecycleElement"
                                           VerticalOptions="FillAndExpand"
                                           HorizontalOptions="FillAndExpand"
-                                          RowHeight="130">
+                                          RowHeight="130"
+                                          IsPullToRefreshEnabled="True"
+                                          IsRefreshing="False" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -96,11 +98,6 @@
                     Clicked="OnAddKegBtnClicked"
                     BorderColor="SlateGray"
                     BorderWidth="1"/>
-        </StackLayout>
-        <StackLayout x:Name="DisplayLoading" Grid.Row="0" IsVisible="False" Padding="12" 
-                 AbsoluteLayout.LayoutFlags="PositionProportional"
-                 AbsoluteLayout.LayoutBounds="0.5,0.5,0.5,0.5">
-            <ActivityIndicator x:Name="activityIndicator" IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
         </StackLayout>
         <BoxView Color="Transparent"
         HorizontalOptions="FillAndExpand"

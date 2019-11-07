@@ -36,32 +36,35 @@ namespace KegMaster.Core
 				}
 			});
 
-			DisplayLoading.IsVisible = true;
-
 			MyListView.ItemsSource = kegs;
-			MyListView.IsVisible = false;
-			kegModBtns.IsVisible = false;
-			Task.Run(async() => await loadKegsBackground());
-        }
 
-		async Task loadKegsBackground()
+			/* Register refresh command */
+			MyListView.RefreshCommand = new Command( async() => {
+				await LoadKegsBackground();
+
+			});
+			MyListView.RefreshCommand.Execute(this);
+		}
+
+		private async Task LoadKegsBackground()
 		{
+			MyListView.IsRefreshing = true;
 			numTaps = 0;
 			KegItem keg = await getKeg(numTaps);
 
 			while (keg != null)  {
 				enableDelete = true;
-
-				kegs.Add(keg);
+				if (kegs.Count > numTaps) {
+					kegs[numTaps] = keg;
+				} else {
+					kegs.Add(keg);
+				}
 				OnPropertyChanged();
 
 				numTaps++;
 				keg = await getKeg(numTaps);
 			}
-
-			DisplayLoading.IsVisible = false;
-			MyListView.IsVisible = true;
-			kegModBtns.IsVisible = true;
+			MyListView.IsRefreshing = false;
 		}
 
 		/*----------------------------------------------------------------------
@@ -73,10 +76,16 @@ namespace KegMaster.Core
             return (keg);
         }
 
-        /*----------------------------------------------------------------------
+
+		private void bleh(object sender, EventArgs e)
+		{
+			Task.Run(async() => await LoadKegsBackground());
+			MyListView.EndRefresh();
+		}
+		/*----------------------------------------------------------------------
         Set callback for when on-screen item has been selected
         ----------------------------------------------------------------------*/
-        async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+		async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             if (e.Item == null)
                 return;
