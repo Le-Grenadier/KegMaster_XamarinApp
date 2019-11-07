@@ -27,7 +27,7 @@
                                     IsSpellCheckEnabled="True"
                                     IsTextPredictionEnabled="True"
                                     IsPassword="False" 
-                                    Margin="20,0,0,0"/>
+                                    Margin="15,0,15,0"/>
                         </StackLayout>
                         <!-- Style -->
                         <StackLayout Orientation="Vertical" Grid.Column="1">
@@ -41,7 +41,7 @@
                                     IsSpellCheckEnabled="True"
                                     IsTextPredictionEnabled="True"
                                     IsPassword="False" 
-                                    Margin="20,0,0,0"/>
+                                    Margin="15,0,15,0"/>
                         </StackLayout>
                     </Grid>
                     <!-- Description -->
@@ -57,7 +57,7 @@
                                 IsSpellCheckEnabled="True"
                                 IsTextPredictionEnabled="True"
                                 HeightRequest="100"
-                                Margin="20,0,0,0"/>
+                                Margin="15,0,15,0"/>
                     </StackLayout>
 
                     <!-- Horizontal Rule -->
@@ -74,7 +74,7 @@
                                     HorizontalOptions="FillAndExpand" />
                             <DatePicker x:Name="startDatePicker"
                                         Format="ddd, MMM d, yyyy"
-                                        Margin="20, 0, 0, 5" />
+                                        Margin="15, 0, 15, 5" />
                         </StackLayout>
                         <StackLayout Grid.Row="0" Grid.Column="1">
                             <Label x:Name="labelDateAvailable"
@@ -82,7 +82,7 @@
                                     HorizontalOptions="FillAndExpand" />
                             <DatePicker x:Name="endDatePicker"
                                         Format="ddd, MMM d, yyyy"
-                                        Margin="20, 0, 0, 5"
+                                        Margin="15, 0, 15, 5"
                                         MinimumDate="{Binding Source={x:Reference startDatePicker}, Path=Date}" />
                         </StackLayout>
                         </Grid>
@@ -101,7 +101,7 @@
                                         TranslationY="-10"
                                         Keyboard="Numeric"
                                         MaxLength="15"
-                                        Margin="20, 0, 0, 7" />
+                                        Margin="15, 0, 15, 7" />
                         </StackLayout>
                         <StackLayout Grid.Row="0" Grid.Column="1">
                             <!-- Pour Qty Sample -->
@@ -116,7 +116,7 @@
                                     TranslationY="-10"
                                     Keyboard="Numeric"
                                     MaxLength="15"
-                                    Margin="20,0,0,10"/>
+                                    Margin="15,0,15,10"/>
                         </StackLayout>
                     </Grid>
 
@@ -139,7 +139,7 @@
                                 Text="{Binding QtyRemain}"
                                 VerticalOptions="Start"
                                 HorizontalOptions="FillAndExpand"
-                                Margin="20,0,0,0"
+                                Margin="15,0,15,0"
                                 HeightRequest="30"
                                 TranslationX="5"/>
                     </StackLayout>
@@ -156,7 +156,7 @@
                                 Text="{Binding PressureCrnt}"
                                 VerticalOptions="Start"
                                 HorizontalOptions="FillAndExpand"
-                                Margin="20,0,0,0"
+                                Margin="15,0,15,0"
                                 HeightRequest="30"
                                 TranslationX="5"/>
                     </StackLayout>
@@ -176,7 +176,7 @@
                                 IsSpellCheckEnabled="True"
                                 IsTextPredictionEnabled="True"
                                 IsPassword="False"
-                                Margin="20,0,0,0"
+                                Margin="15,0,15,0"
                                Text="5"/>
                     </StackLayout>
 
@@ -194,36 +194,34 @@
                                 IsSpellCheckEnabled="True"
                                 IsTextPredictionEnabled="True"
                                 IsPassword="False" 
-                                Margin="20,0,0,0"/>
+                                Margin="15,0,15,0"/>
                     </StackLayout>
                 </Grid>
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
                         <!-- Dispense / Notify -->
                         <Button x:Name="btnPourEn"
-                                Grid.Row="4" Grid.Column="0"
                                 Text="Unlock Tap"
                                 BackgroundColor="LightGray"
                                 VerticalOptions="End"
-                                HorizontalOptions="FillAndExpand"
+                                HorizontalOptions="CenterAndExpand"
                                 Clicked="OnPourBtnClicked"
                                 BorderColor="SlateGray"
-                                BorderWidth="1"/>
+                                BorderWidth="1"
+                                WidthRequest="150"/>
 
                         <Button x:Name="btnPresEn"
-                                Grid.Row="4" Grid.Column="1"
                                 Text="Enable C02"
                                 BackgroundColor="LightGray"
                                 VerticalOptions="End"
-                                HorizontalOptions="FillAndExpand"
+                                HorizontalOptions="CenterAndExpand"
                                 Clicked="OnPressureBtnClicked"
                                 BorderColor="SlateGray"
-                                BorderWidth="1" />
+                                BorderWidth="1"
+                                WidthRequest="150"/>
                     </StackLayout>
                     <StackLayout Margin="0,20,0,0">
                     <Button x:Name="btnPresUpdt"
-                            Grid.Row="6" Grid.Column="0"
-                            Grid.ColumnSpan="2"
                             Text="Update Keg"
                             BackgroundColor="IndianRed"
                             TextColor="NavajoWhite"
@@ -232,7 +230,8 @@
                             HorizontalOptions="FillAndExpand"
                             Clicked="OnUpdateBtnClicked"
                             BorderColor="DarkSlateGray"
-                            BorderWidth="1"/>
+                            BorderWidth="1"
+                            WidthRequest="300"/>
                     </StackLayout>
                     </StackLayout>
                 </StackLayout>
