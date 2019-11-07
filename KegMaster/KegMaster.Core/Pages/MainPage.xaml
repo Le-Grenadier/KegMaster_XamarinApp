@@ -6,19 +6,53 @@
     x:Class="KegMaster.Core.MainPage"
     Title="Keg Master"
     ios:Page.UseSafeArea="true">
+    <ContentPage.ToolbarItems> 
+    <ToolbarItem x:Name="btnSignInSignOut"
+                  Text="Sign In"
+                  Clicked="OnSignInSignOut" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" />
+            <!-- TODO: Add user profile page
             <StackLayout x:Name="slUser" IsVisible="False" Padding="5,10">
                 <StackLayout Orientation="Horizontal">
                     <Label Text="Name: " FontAttributes="Bold" />
                     <Label FontAttributes="Bold" x:Name="lblName" />
                 </StackLayout>
             </StackLayout>
-            <Button x:Name="btnManageBeverage" Text="Manage Kegs" Clicked="OnManageKegs" VerticalOptions="End" HorizontalOptions="FillAndExpand" IsVisible="false"/>
-            <Button x:Name="btnSignInSignOut" Text="Sign in" Clicked="OnSignInSignOut" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
-            <Button x:Name="btnEditProfile" Text="Edit Profile" Clicked="OnEditProfile" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
-            <Button x:Name="btnResetPassword" Text="Reset Password" Clicked="OnResetPassword" VerticalOptions="End" HorizontalOptions="FillAndExpand"/>
+            -->
+            <Button x:Name="btnManageBeverage"
+                    IsVisible="false"
+                    Text="Manage Kegs" FontAttributes="Bold"
+                    Clicked="OnManageKegs"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200"
+                    BackgroundColor="LightGray"
+                    BorderColor="SlateGray"
+                    BorderWidth="1"
+                    Margin="10,5,10,5"/>
+            <!-- TODO: Move to user profile page -->
+            <Button x:Name="btnEditProfile"
+                    IsVisible="false"
+                    Text="Edit Profile" FontAttributes="Bold"
+                    Clicked="OnEditProfile"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200"
+                    BackgroundColor="LightGray"
+                    BorderColor="SlateGray"
+                    BorderWidth="1"
+                    Margin="10,5,10,5"/>
+            <Button x:Name="btnResetPassword"
+                    Text="Reset Password" FontAttributes="Bold"
+                    Clicked="OnResetPassword"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200"
+                    BackgroundColor="LightGray"
+                    BorderColor="SlateGray"
+                    BorderWidth="1"
+                    Margin="10,5,10,5"/>
+
             <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
         </StackLayout>
     </ContentPage.Content>

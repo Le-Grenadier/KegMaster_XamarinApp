@@ -5,6 +5,8 @@ using KegMaster.Core.Features.LogOn;
 using Xamarin.Forms;
 
 using KegMaster.Core.Pages.ManageKegs_Views;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace KegMaster.Core
 {
@@ -16,13 +18,14 @@ namespace KegMaster.Core
         {
             InitializeComponent();
 
-            /* Grab an instance of the IAuthenticationService using DependencyService.
+			/* Grab an instance of the IAuthenticationService using DependencyService.
              * 
              * NOTE: this will give us an instance of B2CAuthenticationService 
              * because we registered that class in App.xaml.cs
              * 
              * */
-            authenticationService = DependencyService.Get<IAuthenticationService>();
+
+			authenticationService = DependencyService.Get<IAuthenticationService>();
 
         }
 
@@ -35,17 +38,15 @@ namespace KegMaster.Core
         {
             try
             {
-                if (btnSignInSignOut.Text == "Sign in")
+                if (btnSignInSignOut.Text.ToLower().Equals("sign in"))
                 {
                     var userContext = await authenticationService.SignInAsync();
-                    UpdateSignInState(userContext);
-                    UpdateUserInfo(userContext);
+                    await UpdateSignInState(userContext);
                 }
                 else
                 {
                     var userContext = await authenticationService.SignOutAsync();
-                    UpdateSignInState(userContext);
-                    UpdateUserInfo(userContext);
+                    await UpdateSignInState(userContext);
                 }
             }
             catch (Exception ex)
@@ -54,7 +55,7 @@ namespace KegMaster.Core
                 // should ONLY be done for B2C
                 // reset and not any other error.
                 if (ex.Message.Contains("AADB2C90118"))
-                    OnPasswordReset();
+                    await OnPasswordReset();
                 // Alert if any exception excluding user cancelling sign-in dialog
                 else
                     await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
@@ -65,8 +66,7 @@ namespace KegMaster.Core
             try
             {
                 var userContext = await authenticationService.EditProfileAsync();
-                UpdateSignInState(userContext);
-                UpdateUserInfo(userContext);
+                await UpdateSignInState(userContext);
             }
             catch (Exception ex)
             {
@@ -80,8 +80,7 @@ namespace KegMaster.Core
             try
             {
                 var userContext = await authenticationService.ResetPasswordAsync();
-                UpdateSignInState(userContext);
-                UpdateUserInfo(userContext);
+                await UpdateSignInState(userContext);
             }
             catch (Exception ex)
             {
@@ -90,13 +89,12 @@ namespace KegMaster.Core
                     await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
             }
         }
-        async void OnPasswordReset()
+        async Task OnPasswordReset()
         {
             try
             {
                 var userContext = await authenticationService.ResetPasswordAsync();
-                UpdateSignInState(userContext);
-                UpdateUserInfo(userContext);
+                await UpdateSignInState(userContext);
             }
             catch (Exception ex)
             {
@@ -106,18 +104,28 @@ namespace KegMaster.Core
             }
         }
 
-        void UpdateSignInState(UserContext userContext)
+        async Task UpdateSignInState(UserContext userContext)
         {
+			/* Update Sign In/Out button text */
             var isSignedIn = userContext.IsLoggedOn;
             btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
-            btnEditProfile.IsVisible = isSignedIn;
-            slUser.IsVisible = isSignedIn;
 
-            btnManageBeverage.IsVisible = isSignedIn ? true : false;
-        }
-        public void UpdateUserInfo(UserContext userContext)
-        {
-            lblName.Text = userContext.Name;
-        }
-    }
+			/* Show/Hide Reset Password */
+			btnResetPassword.Opacity = !isSignedIn ? 0 : 100;
+			await btnResetPassword.FadeTo(Convert.ToDouble(!isSignedIn), 500);
+			btnResetPassword.IsVisible = !isSignedIn;
+
+			/* Show/Hide Manage Kegs */
+			btnManageBeverage.Opacity = isSignedIn ? 0 : 100;
+			btnManageBeverage.IsVisible = isSignedIn;
+
+			/* Show/Hide Edit Profile */
+			btnEditProfile.Opacity = isSignedIn ? 0 : 100;
+			btnEditProfile.IsVisible = isSignedIn;
+
+			/* Fade Buttons */
+			await btnManageBeverage.FadeTo(Convert.ToDouble(isSignedIn), 500);
+			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 1000);
+		}
+	}
 }
