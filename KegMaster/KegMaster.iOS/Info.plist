@@ -30,32 +30,14 @@
 			<array>
 				<string>msal90c0fe63-bcf2-44d5-8fb7-b8bbc0b29dc6</string>
 			</array>
+			<key>CFBundleURLIconFile</key>
+			<string>Icon-58</string>
 		</dict>
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>13.1</string>
 	<key>CFBundleDisplayName</key>
 	<string>KegMaster</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon-60@2x</string>
-		<string>Icon-60@3x</string>
-		<string>Icon-76</string>
-		<string>Icon-76@2x</string>
-		<string>Default</string>
-		<string>Default@2x</string>
-		<string>Default-568h@2x</string>
-		<string>Default-Portrait</string>
-		<string>Default-Portrait@2x</string>
-		<string>Icon-Small-40</string>
-		<string>Icon-Small-40@2x</string>
-		<string>Icon-Small-40@3x</string>
-		<string>Icon-Small</string>
-		<string>Icon-Small@2x</string>
-		<string>Icon-Small@3x</string>
-	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>KegMaster</string>
 	<key>CFBundleIdentifier</key>
@@ -70,5 +52,7 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>
