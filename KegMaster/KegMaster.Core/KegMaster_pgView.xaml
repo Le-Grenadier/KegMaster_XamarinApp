@@ -11,7 +11,7 @@
                                           HorizontalOptions="FillAndExpand"
                                           RowHeight="130"
                                           IsPullToRefreshEnabled="True"
-                                          IsRefreshing="False" >
+                                          IsRefreshing="{Binding IsBusy}" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

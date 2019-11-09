@@ -48,7 +48,9 @@ namespace KegMaster.Core
 
 		private async Task LoadKegsBackground()
 		{
-			MyListView.IsRefreshing = true;
+			/* Set the 'busy' state */
+			IsBusy = true;
+			await kegModBtns.FadeTo(0.1, 100);
 			numTaps = 0;
 			KegItem keg = await getKeg(numTaps);
 
@@ -64,7 +66,8 @@ namespace KegMaster.Core
 				numTaps++;
 				keg = await getKeg(numTaps);
 			}
-			MyListView.IsRefreshing = false;
+			IsBusy = false;
+			await kegModBtns.FadeTo(1, 500);
 		}
 
 		/*----------------------------------------------------------------------
@@ -102,6 +105,9 @@ namespace KegMaster.Core
 		----------------------------------------------------------------------*/
 		async void OnAddKegBtnClicked(object sender, EventArgs args)
 		{
+			/* Disable while still loading kegs */
+			if (IsBusy) { return; }
+
 			KegItem keg = new KegItem();
 			keg.TapNo = numTaps;
 
@@ -117,6 +123,9 @@ namespace KegMaster.Core
 		----------------------------------------------------------------------*/
 		async void OnRemoveKegBtnClicked(object sender, EventArgs args)
 		{
+			/* Disable while still loading kegs */
+			if (IsBusy) { return; }
+
 			string s = await DisplayActionSheet(string.Format("Kegs must be deleted in descending order. \nDelete Keg {0}?", numTaps), "Cancel", "Delete Keg");
 			if( s.Contains("Delete") && kegs.Count >= numTaps) {
 				await manager.DeleteKegAsync(kegs[numTaps - 1]);
