@@ -11,9 +11,19 @@
                   Text="Sign In"
                   Clicked="OnSignInSignOut" />
     </ContentPage.ToolbarItems>
+
     <ContentPage.Content>
-        <StackLayout>
-            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" />
+    <Grid Padding="0">
+        <!-- Background -->
+            <Image
+            Aspect="AspectFill"
+            Source="Background.jpeg"
+            RelativeLayout.HeightConstraint="{ConstraintExpression RelativeToParent,Property=Height,Factor=1,Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression RelativeToParent,Property=Width,Factor=1,Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression RelativeToParent,Property=Height,Factor=0,Constant=0}">
+           </Image>
+            <StackLayout>
+               <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" />
             <!-- TODO: Add user profile page
             <StackLayout x:Name="slUser" IsVisible="False" Padding="5,10">
                 <StackLayout Orientation="Horizontal">
@@ -22,6 +32,20 @@
                 </StackLayout>
             </StackLayout>
             -->
+            <StackLayout x:Name="labelWelcome"
+                         VerticalOptions="Center" HorizontalOptions="Center">
+                <Label Text="Welcome to Keg Master!"
+                       HorizontalOptions="Center"
+                       BackgroundColor="Beige"
+                       FontAttributes="Bold"
+                       FontSize="Title"
+                    Margin="10,10,10,0"/>
+                <Label Text="Please sign in to continue."
+                       HorizontalOptions="Center"
+                       BackgroundColor="Beige"
+                       FontAttributes="Bold"
+                    Margin="10,0,10,5"/>
+            </StackLayout>
             <Button x:Name="btnManageBeverage"
                     IsVisible="false"
                     Text="Manage Kegs" FontAttributes="Bold"
@@ -44,6 +68,7 @@
                     BorderWidth="1"
                     Margin="10,5,10,5"/>
             <Button x:Name="btnResetPassword"
+                    IsVisible="false"
                     Text="Reset Password" FontAttributes="Bold"
                     Clicked="OnResetPassword"
                     VerticalOptions="Center" HorizontalOptions="Center"
@@ -55,5 +80,6 @@
 
             <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
         </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
