@@ -7,9 +7,9 @@
     Title="Keg Master"
     ios:Page.UseSafeArea="true">
     <ContentPage.ToolbarItems> 
-    <ToolbarItem x:Name="btnSignInSignOut"
-                  Text="Sign In"
-                  Clicked="OnSignInSignOut" />
+    <ToolbarItem x:Name="btnSignOut"
+                  Text="Sign Out"
+                  Clicked="OnSignOut"/>
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
@@ -46,6 +46,16 @@
                        FontAttributes="Bold"
                     Margin="10,0,10,5"/>
             </StackLayout>
+            <Button x:Name="btnSignIn"
+                    IsVisible="true"
+                    Text="Sign in" FontAttributes="Bold"
+                    Clicked="OnSignIn"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    WidthRequest="200"
+                    BackgroundColor="LightGray"
+                    BorderColor="SlateGray"
+                    BorderWidth="1"
+                    Margin="10,5,10,5"/>
             <Button x:Name="btnManageBeverage"
                     IsVisible="false"
                     Text="Manage Kegs" FontAttributes="Bold"

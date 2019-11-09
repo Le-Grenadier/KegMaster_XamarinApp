@@ -27,10 +27,10 @@ namespace KegMaster.Core
              * */
 
 			authenticationService = DependencyService.Get<IAuthenticationService>();
+			btnSignOut.IsEnabled = false;
+		}
 
-        }
-
-        async void OnManageKegs(object sender, EventArgs e)
+		async void OnManageKegs(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new KegMaster_pgView());
         }
@@ -40,22 +40,14 @@ namespace KegMaster.Core
 			await Navigation.PushAsync(new KegMaster_Credits());
 		}
 
-		async void OnSignInSignOut(object sender, EventArgs e)
-        {
-            try
-            {
-                if (btnSignInSignOut.Text.ToLower().Equals("sign in"))
-                {
-                    var userContext = await authenticationService.SignInAsync();
-                    await UpdateSignInState(userContext);
-                }
-                else
-                {
-                    var userContext = await authenticationService.SignOutAsync();
-                    await UpdateSignInState(userContext);
-                }
-            }
-            catch (Exception ex)
+		async void OnSignIn(object sender, EventArgs e) {
+			if (IsBusy) { return; }
+			IsBusy = true;
+			try {
+				var userContext = await authenticationService.SignInAsync();
+				await UpdateSignInState(userContext);
+				btnSignOut.IsEnabled = true;
+			} catch (Exception ex)
             {
                 // Checking the exception message 
                 // should ONLY be done for B2C
@@ -66,7 +58,29 @@ namespace KegMaster.Core
                 else
                     await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
             }
-        }
+			IsBusy = false;
+		}
+
+		async void OnSignOut(object sender, EventArgs e) {
+			if (IsBusy) { return; }
+			IsBusy = true;
+			try {
+				var userContext = await authenticationService.SignOutAsync();
+				await UpdateSignInState(userContext);
+				btnSignOut.IsEnabled = false;
+			} catch (Exception ex) {
+				// Checking the exception message 
+				// should ONLY be done for B2C
+				// reset and not any other error.
+				if (ex.Message.Contains("AADB2C90118"))
+					await OnPasswordReset();
+				// Alert if any exception excluding user cancelling sign-in dialog
+				else
+					await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
+			}
+			IsBusy = false;
+		}
+
         async void OnEditProfile(object sender, EventArgs e)
         {
             try
@@ -81,6 +95,7 @@ namespace KegMaster.Core
                     await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
             }
         }
+
         async void OnResetPassword(object sender, EventArgs e)
         {
             try
@@ -114,25 +129,24 @@ namespace KegMaster.Core
         {
 			/* Update Sign In/Out button text */
 		var isSignedIn = userContext.IsLoggedOn;
-            btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
-
-			/* Hide Credits page to reload it nicely below */
-			btnCredits.Opacity = !isSignedIn ? 0 : 1;
-			btnCredits.IsVisible = true;
+            btnSignOut.IsEnabled = isSignedIn;
+			
 
 			/*--------------------------------------------
 			Prior to fade, make buttons visible but
 			opacity == 0 if transitioning to signed in. 
 			--------------------------------------------*/
 			labelWelcome.Opacity = !isSignedIn ? 0 : 1;
+			btnSignIn.Opacity = !isSignedIn ? 0 : 1;
 			btnManageBeverage.Opacity = isSignedIn ? 0 : 1;
 			btnEditProfile.Opacity = isSignedIn ? 0 : 1;
 			btnResetPassword.Opacity = isSignedIn ? 0 : 1;
-			btnCredits.Opacity = isSignedIn ? 0 : 1;
+			btnCredits.Opacity = 1;
 
 			if (isSignedIn) {
 				/* Fade welcome and credits first if signing in, else last */
 				await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 250);
+				await btnSignIn.FadeTo(Convert.ToDouble(false), 250);
 				await btnCredits.FadeTo(Convert.ToDouble(false), 250);
 
 				/* Make buttons visible */
@@ -166,6 +180,7 @@ namespace KegMaster.Core
 			}
 
 			/* Credits button is special case, always fade in */
+			await btnSignIn.FadeTo(Convert.ToDouble(!isSignedIn), 250);
 			await btnCredits.FadeTo(1, 250);
 
 		}
