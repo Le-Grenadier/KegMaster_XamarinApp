@@ -113,40 +113,61 @@ namespace KegMaster.Core
         async Task UpdateSignInState(UserContext userContext)
         {
 			/* Update Sign In/Out button text */
-            var isSignedIn = userContext.IsLoggedOn;
+		var isSignedIn = userContext.IsLoggedOn;
             btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
 
-			/* Show/Hide Welcome */
-			labelWelcome.Opacity = !isSignedIn ? 0 : 100;
-			await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 500);
-			labelWelcome.IsVisible = !isSignedIn;
-
 			/* Hide Credits page to reload it nicely below */
-			btnCredits.Opacity = !isSignedIn ? 0 : 100;
-			await btnCredits.FadeTo(Convert.ToDouble(!isSignedIn), 500);
-			btnCredits.IsVisible = !isSignedIn;
+			btnCredits.Opacity = !isSignedIn ? 0 : 1;
+			btnCredits.IsVisible = true;
 
-			/* Show/Hide Manage Kegs */
-			btnManageBeverage.Opacity = isSignedIn ? 0 : 100;
-			btnManageBeverage.IsVisible = isSignedIn;
+			/*--------------------------------------------
+			Prior to fade, make buttons visible but
+			opacity == 0 if transitioning to signed in. 
+			--------------------------------------------*/
+			labelWelcome.Opacity = !isSignedIn ? 0 : 1;
+			btnManageBeverage.Opacity = isSignedIn ? 0 : 1;
+			btnEditProfile.Opacity = isSignedIn ? 0 : 1;
+			btnResetPassword.Opacity = isSignedIn ? 0 : 1;
+			btnCredits.Opacity = isSignedIn ? 0 : 1;
 
-			/* Show/Hide Edit Profile */
-			btnEditProfile.Opacity = isSignedIn ? 0 : 100;
-			btnEditProfile.IsVisible = isSignedIn;
+			if (isSignedIn) {
+				/* Fade welcome and credits first if signing in, else last */
+				await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 250);
+				await btnCredits.FadeTo(Convert.ToDouble(false), 250);
 
-			/* Show/Hide Reset Password */
-			btnResetPassword.Opacity = isSignedIn ? 0 : 100;
-			btnResetPassword.IsVisible = isSignedIn;
-
-			/* Show/Hide Credits Page */
-			btnCredits.Opacity = isSignedIn ? 0 : 100;
-			btnCredits.IsVisible = isSignedIn;
+				/* Make buttons visible */
+				btnManageBeverage.IsVisible = isSignedIn;
+				btnEditProfile.IsVisible = isSignedIn;
+				btnResetPassword.IsVisible = isSignedIn;
+				btnCredits.IsVisible = true;
+			}
 
 			/* Fade Buttons */
-			await btnManageBeverage.FadeTo(Convert.ToDouble(isSignedIn), 500);
-			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 500);
-			await btnResetPassword.FadeTo(Convert.ToDouble(isSignedIn), 500);
-			await btnCredits.FadeTo(Convert.ToDouble(isSignedIn), 500);
+			await btnManageBeverage.FadeTo(Convert.ToDouble(isSignedIn), 250);
+			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 250);
+			await btnResetPassword.FadeTo(Convert.ToDouble(isSignedIn), 250);
+
+			/*--------------------------------------------
+			Post fade, make buttons invisible but
+			opacity == 0 if transitioning to signed in. 
+			--------------------------------------------*/
+			if (!isSignedIn) {
+				/* Fade credits first if signing in, else last -- prior to changing number of elements on page though */
+				await btnCredits.FadeTo(Convert.ToDouble(false), 250);
+
+				/* Make buttons visible */
+				btnManageBeverage.IsVisible = isSignedIn;
+				btnEditProfile.IsVisible = isSignedIn;
+				btnResetPassword.IsVisible = isSignedIn;
+				btnCredits.IsVisible = true;
+
+				/* Fade welcome first if signing in, else last */
+				await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 250);
+			}
+
+			/* Credits button is special case, always fade in */
+			await btnCredits.FadeTo(1, 250);
+
 		}
 	}
 }
