@@ -110,10 +110,10 @@ namespace KegMaster.Core
             var isSignedIn = userContext.IsLoggedOn;
             btnSignInSignOut.Text = isSignedIn ? "Sign out" : "Sign in";
 
-			/* Show/Hide Reset Password */
-			btnResetPassword.Opacity = !isSignedIn ? 0 : 100;
-			await btnResetPassword.FadeTo(Convert.ToDouble(!isSignedIn), 500);
-			btnResetPassword.IsVisible = !isSignedIn;
+			/* Show/Hide Welcome */
+			labelWelcome.Opacity = !isSignedIn ? 0 : 100;
+			await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 500);
+			labelWelcome.IsVisible = !isSignedIn;
 
 			/* Show/Hide Manage Kegs */
 			btnManageBeverage.Opacity = isSignedIn ? 0 : 100;
@@ -123,9 +123,14 @@ namespace KegMaster.Core
 			btnEditProfile.Opacity = isSignedIn ? 0 : 100;
 			btnEditProfile.IsVisible = isSignedIn;
 
+			/* Show/Hide Reset Password */
+			btnResetPassword.Opacity = isSignedIn ? 0 : 100;
+			btnResetPassword.IsVisible = isSignedIn;
+
 			/* Fade Buttons */
 			await btnManageBeverage.FadeTo(Convert.ToDouble(isSignedIn), 500);
-			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 1000);
+			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 500);
+			await btnResetPassword.FadeTo(Convert.ToDouble(isSignedIn), 500);
 		}
 	}
 }
