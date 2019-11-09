@@ -57,7 +57,8 @@ namespace KegMaster.Core.Features.LogOn
                 .WithPrompt(Prompt.NoPrompt)
                 .WithAuthority(B2CConstants.AuthorityPasswordReset)
                 .WithParentActivityOrWindow(ParentActivityOrWindow)
-                .ExecuteAsync();
+				.WithUseEmbeddedWebView(true)
+				.ExecuteAsync();
 
             var userContext = UpdateUserInfo(authResult);
 
@@ -73,7 +74,8 @@ namespace KegMaster.Core.Features.LogOn
                 .WithPrompt(Prompt.NoPrompt)
                 .WithAuthority(B2CConstants.AuthorityEditProfile)
                 .WithParentActivityOrWindow(ParentActivityOrWindow)
-                .ExecuteAsync();
+				.WithUseEmbeddedWebView(true)
+				.ExecuteAsync();
 
             var userContext = UpdateUserInfo(authResult);
 
