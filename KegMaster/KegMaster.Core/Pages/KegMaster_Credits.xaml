@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="KegMaster.Core.Pages.KegMaster_Credits">
+    <Grid Padding="0">
+    <!-- Background -->
+        <Image
+        Aspect="AspectFill"
+        Source="Background.jpeg"
+        RelativeLayout.HeightConstraint="{ConstraintExpression RelativeToParent,Property=Height,Factor=1,Constant=0}"
+        RelativeLayout.WidthConstraint="{ConstraintExpression RelativeToParent,Property=Width,Factor=1,Constant=0}"
+        RelativeLayout.YConstraint="{ConstraintExpression RelativeToParent,Property=Height,Factor=0,Constant=0}">
+        </Image>
+        <ListView x:Name="MyListView" CachingStrategy="RecycleElement" Opacity="0.9">
+            <!--Built in Cells-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                    <Grid>
+                    <Label Text="{Binding Title}" Grid.Column="0"/>
+                    <Label Text="{Binding Name}"  Grid.Column="1"/>
+                    </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>

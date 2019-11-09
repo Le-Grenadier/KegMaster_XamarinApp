@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using KegMaster.Core.Pages.ManageKegs_Views;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using KegMaster.Core.Pages;
 
 namespace KegMaster.Core
 {
@@ -34,7 +35,12 @@ namespace KegMaster.Core
             await Navigation.PushAsync(new KegMaster_pgView());
         }
 
-        async void OnSignInSignOut(object sender, EventArgs e)
+		async void OnCredits(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new KegMaster_Credits());
+		}
+
+		async void OnSignInSignOut(object sender, EventArgs e)
         {
             try
             {
@@ -115,6 +121,11 @@ namespace KegMaster.Core
 			await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 500);
 			labelWelcome.IsVisible = !isSignedIn;
 
+			/* Hide Credits page to reload it nicely below */
+			btnCredits.Opacity = !isSignedIn ? 0 : 100;
+			await btnCredits.FadeTo(Convert.ToDouble(!isSignedIn), 500);
+			btnCredits.IsVisible = !isSignedIn;
+
 			/* Show/Hide Manage Kegs */
 			btnManageBeverage.Opacity = isSignedIn ? 0 : 100;
 			btnManageBeverage.IsVisible = isSignedIn;
@@ -127,10 +138,15 @@ namespace KegMaster.Core
 			btnResetPassword.Opacity = isSignedIn ? 0 : 100;
 			btnResetPassword.IsVisible = isSignedIn;
 
+			/* Show/Hide Credits Page */
+			btnCredits.Opacity = isSignedIn ? 0 : 100;
+			btnCredits.IsVisible = isSignedIn;
+
 			/* Fade Buttons */
 			await btnManageBeverage.FadeTo(Convert.ToDouble(isSignedIn), 500);
 			await btnEditProfile.FadeTo(Convert.ToDouble(isSignedIn), 500);
 			await btnResetPassword.FadeTo(Convert.ToDouble(isSignedIn), 500);
+			await btnCredits.FadeTo(Convert.ToDouble(isSignedIn), 500);
 		}
 	}
 }
