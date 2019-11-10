@@ -30,7 +30,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		void RefreshData()
         {
 			/* Update page title */
-			Page.Title = string.Format("Edit Tap {0}", this.kegTapData.TapNo+1);
+			Page.Title = string.Format("Tap {0}", this.kegTapData.TapNo+1);
 
             /* Update ViewModel Data */
             this.entryKegName.Text = string.Format("{0}", this.kegTapData.Name);
@@ -48,6 +48,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
             this.entryQtyReserve.Text = this.kegTapData.QtyReserve.ToString("N2");
             this.btnPourEn.Text = string.Format("{0}", this.kegTapData.PourEn ? "Lock Tap" : "Unlock Tap");
             this.btnPresEn.Text = string.Format("{0}", this.kegTapData.PressureEn ? "Turn CO2 Off" : "Turn CO2 On");
+
+			Boolean isNewKeg = (this.kegTapData.CreatedAt == null);
+			btnPresUpdt.Text = isNewKeg ? "Create New Keg" : "Update Keg";
 
 			PageLoading.IsVisible = false;
 			PageContent.IsVisible = true;
