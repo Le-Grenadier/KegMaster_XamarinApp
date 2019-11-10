@@ -111,7 +111,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			
 			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
 
-			await Navigation.PopAsync();
+			Page.SendBackButtonPressed();
 		}
 
 		async Task<bool> updateColumnBool(string key, bool current, bool challenge)
@@ -189,6 +189,18 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			if (error != null) {
 				await DisplayAlert("There was an error", error.Message, "OK");
 			}
+		}
+		protected override bool OnBackButtonPressed()
+		{
+			/* Prevent closing page twice */
+			if(Page.IsFocused){
+				base.OnBackButtonPressed();
+			} else {
+				// TODO: Super hack, should find a better way to do this
+				// This will create a second copy of the view page, thereby 'cancelling' a back button press after pressing the 'update keg' button.
+				Navigation.PushAsync(new KegMaster_pgView());
+			}
+			return true;
 		}
 	}
 }
