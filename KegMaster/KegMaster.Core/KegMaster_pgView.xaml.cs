@@ -67,9 +67,10 @@ namespace KegMaster.Core
 				numTaps++;
 				keg = await getKeg(numTaps);
 			}
-			IsBusy = false;
-			MyListView.IsRefreshing = true;
+
 			await kegModBtns.FadeTo(1, 500);
+			IsBusy = false;
+			MyListView.IsRefreshing = false;
 		}
 
 		/*----------------------------------------------------------------------
