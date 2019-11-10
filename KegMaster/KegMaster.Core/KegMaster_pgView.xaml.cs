@@ -24,7 +24,6 @@ namespace KegMaster.Core
 		/* Constructor assumes kegs exist for each index up to n */
 		public KegMaster_pgView()
         {
-
 			InitializeComponent();
 
 			MessagingCenter.Subscribe<TapEdit, KegItem>(this, "KegItem_Updated", (sender, arg) => {

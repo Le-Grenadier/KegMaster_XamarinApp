@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Net;
 using System.Text;
 using System.IO;
+using System.Threading;
 
 namespace KegMaster.Core.Pages.ManageKegs_Views
 {
@@ -17,14 +18,15 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
     {
 		private const string FunctionURL = Constants.FunctionURL;
 		private ConnectionManager manager = ConnectionManager.DefaultManager;
-
 		private KegItem kegTapData;
 
 		public TapEdit()
         {
-            InitializeComponent();
+			/* This back button change will take effect on any pages loaded from this one */
+			InitializeComponent();
 
-            MessagingCenter.Subscribe<KegMaster_pgView, KegItem>(this, "KegItem_EditContext", (sender, arg) => { this.kegTapData = arg; this.RefreshData(); });
+			/* This is to set the current page state */
+			MessagingCenter.Subscribe<KegMaster_pgView, KegItem>(this, "KegItem_EditContext", (sender, arg) => { this.kegTapData = arg; this.RefreshData(); });
 		}
 
 		void RefreshData()
@@ -77,7 +79,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			PageLoading.IsVisible = true;
 			PageContent.IsVisible = false;
 
-			if(this.kegTapData.CreatedAt == null) {
+			if( this.kegTapData.CreatedAt == null ) {
 				this.kegTapData.CreatedAt = DateTimeOffset.Now.ToString();
 				await manager.CreateKegAsync(this.kegTapData);
 			}
@@ -111,10 +113,26 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.ToLower().Equals("turn co2 off"));
 
 			this.kegTapData = await manager.GetActiveKegAsync(this.kegTapData.TapNo);
-			
-			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
 
-			Page.SendBackButtonPressed();
+			/* Make robust in the event a user also presses the back button */
+			//bool pageIsActive = Application.Current.PageDisappearing
+			//		.MainPage is TapEdit || (Application.Current.MainPage is NavigationPage navPage && navPage.CurrentPage is TapEdit);
+			//if (Page.D) {
+
+			Device.StartTimer(TimeSpan.FromMilliseconds(2000), () =>
+			{
+				if (Page.IsVisible) {
+					Navigation.PopAsync();
+				}
+				return false;
+			});
+
+			MessagingCenter.Send<TapEdit, KegItem>(this, "KegItem_Updated", (Database.KegItem)this.kegTapData);
+		}
+
+		protected override void OnDisappearing()
+		{
+			Page.IsVisible = false;
 		}
 
 		async Task<bool> updateColumnBool(string key, bool current, bool challenge)
@@ -122,9 +140,10 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			bool ret = current;
 
 			if (current != challenge) {
-				await updateColumn_sendToDb(key, challenge.ToString());
 				ret = challenge;
+				await updateColumn_sendToDb(key, challenge.ToString());
 			}
+
 			return (ret);
 		}
 
@@ -134,10 +153,11 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			float ret = current;
 
 			if (Math.Abs(current - challenge) > epsilon) {
-				await updateColumn_sendToDb(key, challenge.ToString());
 				ret = challenge;
+				await updateColumn_sendToDb(key, challenge.ToString());
 			}
-			return(ret);
+
+			return (ret);
 		}
 
 		async Task<DateTime> updateColumnDateTime(string key, DateTime current, DateTime challenge)
@@ -147,15 +167,17 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			if( (current.Year != challenge.Year)
 		     || (current.Month != challenge.Month)
 			 || (current.Day != challenge.Day) ){
-				await updateColumn_sendToDb(key, challenge.ToString());
 				ret = challenge;
+				await updateColumn_sendToDb(key, challenge.ToString());
 			}
+
 			return (ret);
 		}
 
 		async Task<string> updateColumnString(string key, string current, string challenge)
 		{
 			string ret = current;
+
 			if (challenge == null) {
 				return ret;
 			}
@@ -163,9 +185,10 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			// Ignore time, only compare date
 			if( (current == null && challenge != null)
 			  ||(!current.Equals(challenge))) {
-				await updateColumn_sendToDb(key, challenge);
 				ret = challenge;
+				await updateColumn_sendToDb(key, challenge);
 			}
+
 			return (ret);
 		}
 
@@ -192,18 +215,6 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			if (error != null) {
 				await DisplayAlert("There was an error", error.Message, "OK");
 			}
-		}
-		protected override bool OnBackButtonPressed()
-		{
-			/* Prevent closing page twice */
-			if(Page.IsFocused){
-				base.OnBackButtonPressed();
-			} else {
-				// TODO: Super hack, should find a better way to do this
-				// This will create a second copy of the view page, thereby 'cancelling' a back button press after pressing the 'update keg' button.
-				Navigation.PushAsync(new KegMaster_pgView());
-			}
-			return true;
 		}
 	}
 }
