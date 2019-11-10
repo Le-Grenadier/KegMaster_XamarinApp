@@ -9,28 +9,29 @@ namespace KegMaster.Core.Database
 	public class KegItem
 	{
 		/* Database values */
-		string id;
-		string alerts;
-		int tapNo;
-		string name;
-		string style;
-		string description;
-		DateTime dateKegged;
-		DateTime dateAvail;
-		bool pourEn;
-		bool pourNotification;
-		float pourQtyGlass;
-		float pourQtySample;
-		float pressureCrnt;
-		float pressureDsrd;
-		float pressureDwellTime;
-		bool pressureEn;
-		float qtyAvailable;
-		float qtyReserve;
+		private string id;
+		private string alerts;
+		private int tapNo;
+		private string name;
+		private string style;
+		private string description;
+		private DateTime dateKegged;
+		private DateTime dateAvail;
+		private bool pourEn;
+		private bool pourNotification;
+		private float pourQtyGlass;
+		private float pourQtySample;
+		private float pressureCrnt;
+		private float pressureDsrd;
+		private float pressureDwellTime;
+		private bool pressureEn;
+		private float qtyAvailable;
+		private float qtyReserve;
 
 		private static string puffLady = "🌬";
 		private static string fullMug = "🍺";
 		private static string prohibited = "🚫";
+
 		/* Constructor - These values cannot be null when inserting data */
 		public KegItem()
 		{
@@ -41,6 +42,12 @@ namespace KegMaster.Core.Database
 			this.CreatedAt = null;
 			this.Deleted = "False";
 		}
+
+		public KegItem Clone()
+		{
+			return((KegMaster.Core.Database.KegItem)this.MemberwiseClone());
+		}
+	
 		/*
          * Get/Set Properties - Json for Query
          *
