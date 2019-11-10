@@ -259,6 +259,7 @@
     <Reference Include="Syncfusion.SfGauge.XForms">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfGauge.17.3.0.19\lib\MonoAndroid10\Syncfusion.SfGauge.XForms.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Android.Export" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
