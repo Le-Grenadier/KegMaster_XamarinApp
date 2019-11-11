@@ -86,7 +86,7 @@
                         </StackLayout>
                         </Grid>
 
-                        <Grid Padding="0,20,0,0">
+                        <Grid Padding="0,10,0,0">
                         <StackLayout Grid.Row="0" Grid.Column="0">
                                 <!-- Pour Qty Glass -->
                                 <Label x:Name="labePourQtyGlass"
@@ -123,11 +123,10 @@
                     <BoxView Color="DarkGray"
                             HorizontalOptions="FillAndExpand"
                             HeightRequest="1"
-                            Margin="30, 15, 30, 15"/>
+                            Margin="30, 10, 30, 15"/>
                 
                     
                 <Grid HorizontalOptions="FillAndExpand" Padding="0">
-
                     <!-- Qty Remaining -->
                     <StackLayout Grid.Row="0" Grid.Column="0">
                         <Label x:Name="labelQtyRemain"
@@ -196,41 +195,44 @@
                                 Margin="15,0,15,0"/>
                     </StackLayout>
                 </Grid>
-                <StackLayout>
-                    <StackLayout Orientation="Horizontal" Margin="0,20,0,0">
-                        <!-- Dispense / Notify -->
-                        <Button x:Name="btnPourEn"
-                                Text="Unlock Tap"
-                                BackgroundColor="LightGray"
-                                VerticalOptions="End"
-                                HorizontalOptions="CenterAndExpand"
-                                Clicked="OnPourBtnClicked"
-                                BorderColor="SlateGray"
-                                BorderWidth="1"
-                                WidthRequest="150"/>
 
-                        <Button x:Name="btnPresEn"
-                                Text="Enable C02"
-                                BackgroundColor="LightGray"
+                <!-- Horizontal Rule -->
+                <BoxView Color="DarkGray"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Margin="30, 30, 30, 10"/>
+                
+                <StackLayout>
+                    <Grid Margin="0,10,0,10">
+                        <!-- Dispense -->
+                        <StackLayout Grid.Column="0" Orientation="Horizontal" Margin="2,0,0,0">
+                        <Label VerticalOptions="Center" Text="Tap:"/>
+                        <Switch x:Name="btnPourEn" Margin="20,0,0,0"/>
+                        </StackLayout>
+                        <!-- Pressurize -->
+                        <StackLayout Grid.Column="1" Orientation="Horizontal" Margin="2,0,0,0">
+                        <Label VerticalOptions="Center" Text="CO2:"/>
+                        <Switch x:Name="btnPresEn" Margin="20,0,0,0"/>
+                        </StackLayout>
+                    </Grid>
+                    
+                <!-- Horizontal Rule -->
+                <BoxView Color="DarkGray"
+                        HorizontalOptions="FillAndExpand"
+                        HeightRequest="1"
+                        Margin="30, 10, 30, 20"/>
+                
+                    <StackLayout Margin="20,10,20,0">
+                        <Button x:Name="btnPresUpdt"
+                                Text="Update Keg"
+                                BackgroundColor="IndianRed"
+                                TextColor="NavajoWhite"
+                                FontAttributes="Bold"
                                 VerticalOptions="End"
-                                HorizontalOptions="CenterAndExpand"
-                                Clicked="OnPressureBtnClicked"
-                                BorderColor="SlateGray"
-                                BorderWidth="1"
-                                WidthRequest="150"/>
-                    </StackLayout>
-                    <StackLayout Margin="0,20,0,0">
-                    <Button x:Name="btnPresUpdt"
-                            Text="Update Keg"
-                            BackgroundColor="IndianRed"
-                            TextColor="NavajoWhite"
-                            FontAttributes="Bold"
-                            VerticalOptions="End"
-                            HorizontalOptions="FillAndExpand"
-                            Clicked="OnUpdateBtnClicked"
-                            BorderColor="DarkSlateGray"
-                            BorderWidth="1"
-                            WidthRequest="300"/>
+                                HorizontalOptions="FillAndExpand"
+                                Clicked="OnUpdateBtnClicked"
+                                BorderColor="DarkSlateGray"
+                                BorderWidth="1"/>
                     </StackLayout>
                     </StackLayout>
                 </StackLayout>

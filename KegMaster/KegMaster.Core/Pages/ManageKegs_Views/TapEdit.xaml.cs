@@ -48,30 +48,14 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.entryPourQtySample.Text = this.kegTapData.PourQtySample.ToString("N2");
 			this.entryQtyRemain.Text = this.kegTapData.QtyAvailable.ToString("N2");
             this.entryQtyReserve.Text = this.kegTapData.QtyReserve.ToString("N2");
-            this.btnPourEn.Text = string.Format("{0}", this.kegTapData.PourEn ? "Lock Tap" : "Unlock Tap");
-            this.btnPresEn.Text = string.Format("{0}", this.kegTapData.PressureEn ? "Turn CO2 Off" : "Turn CO2 On");
+            this.btnPourEn.IsToggled = this.kegTapData.PourEn;
+            this.btnPresEn.IsToggled = this.kegTapData.PressureEn;
 
 			Boolean isNewKeg = (this.kegTapData.CreatedAt == null);
 			btnPresUpdt.Text = isNewKeg ? "Create New Keg" : "Update Keg";
 
 			PageLoading.IsVisible = false;
 			PageContent.Opacity = 1;
-		}
-
-		/*
-         * Pressure Button Pressed
-         */
-		void OnPressureBtnClicked(object sender, EventArgs args)
-        {
-			this.btnPresEn.Text = string.Format("{0}", this.btnPresEn.Text.ToLower().Equals("turn co2 on") ? "Turn CO2 Off" : "Turn CO2 On");
-		}
-
-		/*
-         * Pour Button Pressed
-         */
-		void OnPourBtnClicked(object sender, EventArgs args)
-        {
-			this.btnPourEn.Text = string.Format("{0}", this.btnPourEn.Text.ToLower().Equals("unlock tap") ? "Lock Tap" : "Unlock Tap");
 		}
 
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
@@ -109,9 +93,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData.QtyAvailable = await updateColumnFloat("QtyAvailable", this.kegTapData.QtyAvailable, f_qa);
 			this.kegTapData.QtyReserve = await updateColumnFloat("QtyReserve", this.kegTapData.QtyReserve, f_qr);
 
-			/* These are a littl counter-intuitive, they display the opposite of the current state -- e.g. Pressure is 'on' if button displays 'off' */
-			this.kegTapData.PourEn = await updateColumnBool("PourEn", this.kegTapData.PourEn, !this.btnPourEn.Text.ToLower().Contains("unlock"));
-			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.Text.ToLower().Equals("turn co2 off"));
+			/* These are a little counter-intuitive, they display the opposite of the current state -- e.g. Pressure is 'on' if button displays 'off' */
+			this.kegTapData.PourEn = await updateColumnBool("PourEn", this.kegTapData.PourEn, this.btnPourEn.IsToggled);
+			this.kegTapData.PressureEn = await updateColumnBool("PressureEn", this.kegTapData.PressureEn, this.btnPresEn.IsToggled);
 
 			this.kegTapData = await manager.GetActiveKegAsync(this.kegTapData.TapNo);
 
