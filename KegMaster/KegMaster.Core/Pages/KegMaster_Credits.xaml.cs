@@ -31,7 +31,8 @@ namespace KegMaster.Core.Pages
 			Credits.Add(new CreditType("Software Engineer", "John Grenard"));
 			Credits.Add(new CreditType("Design Engineer",   "John Grenard"));
 			Credits.Add(new CreditType("Kind Words and Support", "Rachel Williams"));
-		    Credits.Add(new CreditType("Background Photo", "Timothy Dykes on Unsplash"));
+			Credits.Add(new CreditType("Alpha Tester", "Rachel Williams"));
+			Credits.Add(new CreditType("Background Photo", "Timothy Dykes on Unsplash"));
 
 			MyListView.ItemsSource = Credits;
 		}
