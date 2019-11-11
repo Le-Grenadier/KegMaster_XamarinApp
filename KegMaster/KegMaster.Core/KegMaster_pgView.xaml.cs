@@ -26,6 +26,9 @@ namespace KegMaster.Core
 		public KegMaster_pgView()
         {
 			InitializeComponent();
+			/* Set back button title to 'cancel' for children of this page */
+			NavigationPage.SetBackButtonTitle(this, "Cancel");
+
 
 			MessagingCenter.Subscribe<TapEdit, KegItem>(this, "KegItem_Updated", (sender, arg) => {
 				if (arg.TapNo >= kegs.Count) {
