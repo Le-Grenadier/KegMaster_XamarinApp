@@ -55,8 +55,8 @@ namespace KegMaster.Core
                 if (ex.Message.Contains("AADB2C90118"))
                     await OnPasswordReset();
                 // Alert if any exception excluding user cancelling sign-in dialog
-                else
-                    await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
+                //else
+                //    await DisplayAlert($"Exception:", ex.ToString(), "Dismiss");
             }
 			IsBusy = false;
 		}
@@ -128,10 +128,9 @@ namespace KegMaster.Core
         async Task UpdateSignInState(UserContext userContext)
         {
 			/* Update Sign In/Out button text */
-		var isSignedIn = userContext.IsLoggedOn;
+			var isSignedIn = userContext.IsLoggedOn;
             btnSignOut.IsEnabled = isSignedIn;
 			
-
 			/*--------------------------------------------
 			Prior to fade, make buttons visible but
 			opacity == 0 if transitioning to signed in. 
