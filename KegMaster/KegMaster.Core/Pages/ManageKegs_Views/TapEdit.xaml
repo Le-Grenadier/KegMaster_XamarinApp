@@ -8,12 +8,11 @@
     Icon="icon.png">
     <ContentPage.Content>
         <ScrollView HorizontalOptions="CenterAndExpand" Padding="20,5,20,5" BackgroundColor="WhiteSmoke">
-            <StackLayout>
-                    <StackLayout x:Name="PageLoading" IsVisible="True" VerticalOptions="Center" HorizontalOptions="Center">
-                            <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black"/>
-                    </StackLayout>
-
-                <StackLayout x:Name="PageContent" IsVisible="True" HorizontalOptions="Center">
+            <Grid>
+                <StackLayout x:Name="PageContent"
+                             Grid.Column="0"
+                             IsVisible="True"
+                             HorizontalOptions="Center">
                     <!-- Name / Style -->
                     <Grid HorizontalOptions="FillAndExpand">
                         <!-- Keg Name -->
@@ -235,7 +234,14 @@
                     </StackLayout>
                     </StackLayout>
                 </StackLayout>
-            </StackLayout>
+                <StackLayout x:Name="PageLoading"
+                             Grid.Column="0"
+                             IsVisible="True"
+                             VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <ActivityIndicator IsEnabled="True" IsRunning="True" IsVisible="True" Color="Black" HorizontalOptions="Fill"/>
+                </StackLayout>
+
+            </Grid>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

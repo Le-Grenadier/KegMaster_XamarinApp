@@ -55,7 +55,7 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			btnPresUpdt.Text = isNewKeg ? "Create New Keg" : "Update Keg";
 
 			PageLoading.IsVisible = false;
-			PageContent.IsVisible = true;
+			PageContent.Opacity = 1;
 		}
 
 		/*
@@ -77,7 +77,8 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		async void OnUpdateBtnClicked(object sender, EventArgs args)
 		{
 			PageLoading.IsVisible = true;
-			PageContent.IsVisible = false;
+			PageContent.Opacity = 0.5;
+			PageContent.IsEnabled = false;
 
 			if( this.kegTapData.CreatedAt == null ) {
 				this.kegTapData.CreatedAt = DateTimeOffset.Now.ToString();
