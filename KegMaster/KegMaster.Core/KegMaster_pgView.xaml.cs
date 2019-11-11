@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using KegMaster.Core.Database;
 using System.Collections.Generic;
 using KegMaster.Core.Pages.ManageKegs_Views;
+using KegMaster.Core.Features.LogOn;
 
 namespace KegMaster.Core
 {
@@ -92,12 +93,10 @@ namespace KegMaster.Core
         ----------------------------------------------------------------------*/
 		async void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            if (e.Item == null)
-                return;
-
-            await Navigation.PushAsync(new Pages.ManageKegs_Views.TapEdit());
-            MessagingCenter.Send<KegMaster_pgView, KegItem>(this, "KegItem_EditContext", (Database.KegItem)e.Item);
-
+			if (e.Item != null && User.data.IsAdmin) {
+				await Navigation.PushAsync(new Pages.ManageKegs_Views.TapEdit());
+				MessagingCenter.Send<KegMaster_pgView, KegItem>(this, "KegItem_EditContext", (Database.KegItem)e.Item);
+			}
             //Deselect Item
             ((ListView)sender).SelectedItem = null;
         }

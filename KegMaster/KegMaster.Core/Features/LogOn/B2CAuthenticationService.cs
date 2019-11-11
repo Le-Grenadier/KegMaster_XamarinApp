@@ -45,9 +45,9 @@ namespace KegMaster.Core.Features.LogOn
             IEnumerable<IAccount> accounts = await PCA.GetAccountsAsync();
             AuthenticationResult authResult = await PCA.AcquireTokenSilent(B2CConstants.Scopes, GetAccountByPolicy(accounts, B2CConstants.PolicySignUpSignIn))
                .WithB2CAuthority(B2CConstants.AuthoritySignInSignUp)
-               .ExecuteAsync();
+			   .ExecuteAsync();
 
-            var newContext = UpdateUserInfo(authResult);
+			var newContext = UpdateUserInfo(authResult);
             return newContext;
         }
 
@@ -157,6 +157,8 @@ namespace KegMaster.Core.Features.LogOn
                 newContext.EmailAddress = emails[0].ToString();
             }
             newContext.IsLoggedOn = true;
+
+			User.InitUser(newContext);
 
             return newContext;
         }
