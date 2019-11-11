@@ -1456,9 +1456,9 @@ namespace KegMaster.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Id.listMode = global::KegMaster.Droid.Resource.Id.listMode;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.list_item = global::KegMaster.Droid.Resource.Id.list_item;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.main_appbar = global::KegMaster.Droid.Resource.Id.main_appbar;
-			global::Xamarin.Forms.Platform.Android.Resource.Id.main_scrollview = global::KegMaster.Droid.Resource.Id.main_scrollview;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.main_tablayout = global::KegMaster.Droid.Resource.Id.main_tablayout;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.main_toolbar = global::KegMaster.Droid.Resource.Id.main_toolbar;
+			global::Xamarin.Forms.Platform.Android.Resource.Id.main_viewpager = global::KegMaster.Droid.Resource.Id.main_viewpager;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.masked = global::KegMaster.Droid.Resource.Id.masked;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.media_actions = global::KegMaster.Droid.Resource.Id.media_actions;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.message = global::KegMaster.Droid.Resource.Id.message;
@@ -1507,7 +1507,6 @@ namespace KegMaster.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Id.select_dialog_listview = global::KegMaster.Droid.Resource.Id.select_dialog_listview;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.selected = global::KegMaster.Droid.Resource.Id.selected;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.shellcontent_appbar = global::KegMaster.Droid.Resource.Id.shellcontent_appbar;
-			global::Xamarin.Forms.Platform.Android.Resource.Id.shellcontent_scrollview = global::KegMaster.Droid.Resource.Id.shellcontent_scrollview;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.shellcontent_toolbar = global::KegMaster.Droid.Resource.Id.shellcontent_toolbar;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.shortcut = global::KegMaster.Droid.Resource.Id.shortcut;
 			global::Xamarin.Forms.Platform.Android.Resource.Id.showCustom = global::KegMaster.Droid.Resource.Id.showCustom;
@@ -2201,6 +2200,7 @@ namespace KegMaster.Droid
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense = global::KegMaster.Droid.Resource.Style.Widget_MaterialComponents_TextInputLayout_OutlinedBox_Dense;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Widget_MaterialComponents_Toolbar = global::KegMaster.Droid.Resource.Style.Widget_MaterialComponents_Toolbar;
 			global::Xamarin.Forms.Platform.Android.Resource.Style.Widget_Support_CoordinatorLayout = global::KegMaster.Droid.Resource.Style.Widget_Support_CoordinatorLayout;
+			global::Xamarin.Forms.Platform.Android.Resource.Style.collectionViewStyle = global::KegMaster.Droid.Resource.Style.collectionViewStyle;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ActionBar = global::KegMaster.Droid.Resource.Styleable.ActionBar;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ActionBar_background = global::KegMaster.Droid.Resource.Styleable.ActionBar_background;
 			global::Xamarin.Forms.Platform.Android.Resource.Styleable.ActionBar_backgroundSplit = global::KegMaster.Droid.Resource.Styleable.ActionBar_backgroundSplit;
@@ -7534,13 +7534,13 @@ namespace KegMaster.Droid
 			public const int main_appbar = 2131230851;
 			
 			// aapt resource value: 0x7F080084
-			public const int main_scrollview = 2131230852;
+			public const int main_tablayout = 2131230852;
 			
 			// aapt resource value: 0x7F080085
-			public const int main_tablayout = 2131230853;
+			public const int main_toolbar = 2131230853;
 			
 			// aapt resource value: 0x7F080086
-			public const int main_toolbar = 2131230854;
+			public const int main_viewpager = 2131230854;
 			
 			// aapt resource value: 0x7F080087
 			public const int masked = 2131230855;
@@ -7846,193 +7846,190 @@ namespace KegMaster.Droid
 			public const int shellcontent_appbar = 2131230954;
 			
 			// aapt resource value: 0x7F0800EB
-			public const int shellcontent_scrollview = 2131230955;
-			
-			// aapt resource value: 0x7F0800EC
-			public const int shellcontent_toolbar = 2131230956;
+			public const int shellcontent_toolbar = 2131230955;
 			
 			// aapt resource value: 0x7F080004
 			public const int SHIFT = 2131230724;
 			
+			// aapt resource value: 0x7F0800EC
+			public const int shortcut = 2131230956;
+			
 			// aapt resource value: 0x7F0800ED
-			public const int shortcut = 2131230957;
+			public const int showCustom = 2131230957;
 			
 			// aapt resource value: 0x7F0800EE
-			public const int showCustom = 2131230958;
+			public const int showHome = 2131230958;
 			
 			// aapt resource value: 0x7F0800EF
-			public const int showHome = 2131230959;
+			public const int showTitle = 2131230959;
 			
 			// aapt resource value: 0x7F0800F0
-			public const int showTitle = 2131230960;
+			public const int sixteensegment = 2131230960;
 			
 			// aapt resource value: 0x7F0800F1
-			public const int sixteensegment = 2131230961;
+			public const int sliding_tabs = 2131230961;
 			
 			// aapt resource value: 0x7F0800F2
-			public const int sliding_tabs = 2131230962;
+			public const int smallLabel = 2131230962;
 			
 			// aapt resource value: 0x7F0800F3
-			public const int smallLabel = 2131230963;
+			public const int snackbar_action = 2131230963;
 			
 			// aapt resource value: 0x7F0800F4
-			public const int snackbar_action = 2131230964;
+			public const int snackbar_text = 2131230964;
 			
 			// aapt resource value: 0x7F0800F5
-			public const int snackbar_text = 2131230965;
+			public const int snap = 2131230965;
 			
 			// aapt resource value: 0x7F0800F6
-			public const int snap = 2131230966;
+			public const int snapMargins = 2131230966;
 			
 			// aapt resource value: 0x7F0800F7
-			public const int snapMargins = 2131230967;
+			public const int spacer = 2131230967;
 			
 			// aapt resource value: 0x7F0800F8
-			public const int spacer = 2131230968;
+			public const int split_action_bar = 2131230968;
 			
 			// aapt resource value: 0x7F0800F9
-			public const int split_action_bar = 2131230969;
+			public const int src_atop = 2131230969;
 			
 			// aapt resource value: 0x7F0800FA
-			public const int src_atop = 2131230970;
+			public const int src_in = 2131230970;
 			
 			// aapt resource value: 0x7F0800FB
-			public const int src_in = 2131230971;
+			public const int src_over = 2131230971;
 			
 			// aapt resource value: 0x7F0800FC
-			public const int src_over = 2131230972;
+			public const int start = 2131230972;
 			
 			// aapt resource value: 0x7F0800FD
-			public const int start = 2131230973;
+			public const int status_bar_latest_event_content = 2131230973;
 			
 			// aapt resource value: 0x7F0800FE
-			public const int status_bar_latest_event_content = 2131230974;
+			public const int stretch = 2131230974;
 			
 			// aapt resource value: 0x7F0800FF
-			public const int stretch = 2131230975;
+			public const int submenuarrow = 2131230975;
 			
 			// aapt resource value: 0x7F080100
-			public const int submenuarrow = 2131230976;
-			
-			// aapt resource value: 0x7F080101
-			public const int submit_area = 2131230977;
+			public const int submit_area = 2131230976;
 			
 			// aapt resource value: 0x7F080005
 			public const int SYM = 2131230725;
 			
+			// aapt resource value: 0x7F080101
+			public const int tabMode = 2131230977;
+			
 			// aapt resource value: 0x7F080102
-			public const int tabMode = 2131230978;
+			public const int tag_transition_group = 2131230978;
 			
 			// aapt resource value: 0x7F080103
-			public const int tag_transition_group = 2131230979;
+			public const int tag_unhandled_key_event_manager = 2131230979;
 			
 			// aapt resource value: 0x7F080104
-			public const int tag_unhandled_key_event_manager = 2131230980;
+			public const int tag_unhandled_key_listeners = 2131230980;
 			
 			// aapt resource value: 0x7F080105
-			public const int tag_unhandled_key_listeners = 2131230981;
+			public const int text = 2131230981;
 			
 			// aapt resource value: 0x7F080106
-			public const int text = 2131230982;
-			
-			// aapt resource value: 0x7F080107
-			public const int text2 = 2131230983;
-			
-			// aapt resource value: 0x7F08010C
-			public const int textinput_counter = 2131230988;
-			
-			// aapt resource value: 0x7F08010D
-			public const int textinput_error = 2131230989;
-			
-			// aapt resource value: 0x7F08010E
-			public const int textinput_helper_text = 2131230990;
-			
-			// aapt resource value: 0x7F080108
-			public const int textSpacerNoButtons = 2131230984;
-			
-			// aapt resource value: 0x7F080109
-			public const int textSpacerNoTitle = 2131230985;
-			
-			// aapt resource value: 0x7F08010A
-			public const int textStart = 2131230986;
+			public const int text2 = 2131230982;
 			
 			// aapt resource value: 0x7F08010B
-			public const int text_input_password_toggle = 2131230987;
+			public const int textinput_counter = 2131230987;
+			
+			// aapt resource value: 0x7F08010C
+			public const int textinput_error = 2131230988;
+			
+			// aapt resource value: 0x7F08010D
+			public const int textinput_helper_text = 2131230989;
+			
+			// aapt resource value: 0x7F080107
+			public const int textSpacerNoButtons = 2131230983;
+			
+			// aapt resource value: 0x7F080108
+			public const int textSpacerNoTitle = 2131230984;
+			
+			// aapt resource value: 0x7F080109
+			public const int textStart = 2131230985;
+			
+			// aapt resource value: 0x7F08010A
+			public const int text_input_password_toggle = 2131230986;
+			
+			// aapt resource value: 0x7F08010E
+			public const int time = 2131230990;
 			
 			// aapt resource value: 0x7F08010F
-			public const int time = 2131230991;
+			public const int title = 2131230991;
 			
 			// aapt resource value: 0x7F080110
-			public const int title = 2131230992;
+			public const int titleDividerNoCustom = 2131230992;
 			
 			// aapt resource value: 0x7F080111
-			public const int titleDividerNoCustom = 2131230993;
+			public const int title_template = 2131230993;
 			
 			// aapt resource value: 0x7F080112
-			public const int title_template = 2131230994;
+			public const int toolbar = 2131230994;
 			
 			// aapt resource value: 0x7F080113
-			public const int toolbar = 2131230995;
+			public const int top = 2131230995;
 			
 			// aapt resource value: 0x7F080114
-			public const int top = 2131230996;
+			public const int topPanel = 2131230996;
 			
 			// aapt resource value: 0x7F080115
-			public const int topPanel = 2131230997;
+			public const int touch_outside = 2131230997;
 			
 			// aapt resource value: 0x7F080116
-			public const int touch_outside = 2131230998;
+			public const int transition_current_scene = 2131230998;
 			
 			// aapt resource value: 0x7F080117
-			public const int transition_current_scene = 2131230999;
+			public const int transition_layout_save = 2131230999;
 			
 			// aapt resource value: 0x7F080118
-			public const int transition_layout_save = 2131231000;
+			public const int transition_position = 2131231000;
 			
 			// aapt resource value: 0x7F080119
-			public const int transition_position = 2131231001;
+			public const int transition_scene_layoutid_cache = 2131231001;
 			
 			// aapt resource value: 0x7F08011A
-			public const int transition_scene_layoutid_cache = 2131231002;
+			public const int transition_transform = 2131231002;
 			
 			// aapt resource value: 0x7F08011B
-			public const int transition_transform = 2131231003;
+			public const int triangle = 2131231003;
 			
 			// aapt resource value: 0x7F08011C
-			public const int triangle = 2131231004;
+			public const int uniform = 2131231004;
 			
 			// aapt resource value: 0x7F08011D
-			public const int uniform = 2131231005;
+			public const int unlabeled = 2131231005;
 			
 			// aapt resource value: 0x7F08011E
-			public const int unlabeled = 2131231006;
+			public const int up = 2131231006;
 			
 			// aapt resource value: 0x7F08011F
-			public const int up = 2131231007;
+			public const int useLogo = 2131231007;
 			
 			// aapt resource value: 0x7F080120
-			public const int useLogo = 2131231008;
+			public const int vertical = 2131231008;
 			
 			// aapt resource value: 0x7F080121
-			public const int vertical = 2131231009;
+			public const int view_offset_helper = 2131231009;
 			
 			// aapt resource value: 0x7F080122
-			public const int view_offset_helper = 2131231010;
+			public const int visible = 2131231010;
 			
 			// aapt resource value: 0x7F080123
-			public const int visible = 2131231011;
+			public const int volume_item_container = 2131231011;
 			
 			// aapt resource value: 0x7F080124
-			public const int volume_item_container = 2131231012;
+			public const int webview = 2131231012;
 			
 			// aapt resource value: 0x7F080125
-			public const int webview = 2131231013;
+			public const int withText = 2131231013;
 			
 			// aapt resource value: 0x7F080126
-			public const int withText = 2131231014;
-			
-			// aapt resource value: 0x7F080127
-			public const int wrap_content = 2131231015;
+			public const int wrap_content = 2131231014;
 			
 			static Id()
 			{
@@ -9274,6 +9271,9 @@ namespace KegMaster.Droid
 			
 			// aapt resource value: 0x7F0D00C5
 			public const int CardView_Light = 2131558597;
+			
+			// aapt resource value: 0x7F0D0202
+			public const int collectionViewStyle = 2131558914;
 			
 			// aapt resource value: 0x7F0D00C6
 			public const int MyTheme = 2131558598;
