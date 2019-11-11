@@ -87,17 +87,19 @@
                     BorderColor="SlateGray"
                     BorderWidth="1"
                     Margin="10,5,10,5"/>
+            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
             <Button x:Name="btnCredits"
                     Text="Credits" FontAttributes="Bold"
                     Clicked="OnCredits"
-                    VerticalOptions="Center" HorizontalOptions="Center"
-                    WidthRequest="200"
-                    BackgroundColor="LightGray"
+                    VerticalOptions="Center" HorizontalOptions="Start"
+                    Opacity="0.7"
+                    WidthRequest="100"
+                    HeightRequest="33"
+                    BackgroundColor="Beige"
                     BorderColor="SlateGray"
                     BorderWidth="1"
                     Margin="10,5,10,5"/>
-            <BoxView Color="Transparent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
-        </StackLayout>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
