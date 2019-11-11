@@ -101,6 +101,7 @@
         </StackLayout>
         <BoxView Color="Transparent"
         HorizontalOptions="FillAndExpand"
+                 HeightRequest="20"
         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.1}"/>
     </StackLayout>
