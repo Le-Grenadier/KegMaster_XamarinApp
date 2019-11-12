@@ -33,6 +33,7 @@ namespace KegMaster.Core
 			MessagingCenter.Subscribe<TapEdit, KegItem>(this, "KegItem_Updated", (sender, arg) => {
 				if (arg.TapNo >= kegs.Count) {
 					kegs.Add(arg);
+					numTaps++;
 				} else {
 					kegs.RemoveAt(arg.TapNo);
 					kegs.Insert(arg.TapNo, arg);
@@ -115,7 +116,6 @@ namespace KegMaster.Core
 			KegItem keg = new KegItem();
 			keg.TapNo = numTaps;
 
-			numTaps++;
 			enableDelete = numTaps > 0;
 
 			await Navigation.PushAsync(new Pages.ManageKegs_Views.TapEdit());
