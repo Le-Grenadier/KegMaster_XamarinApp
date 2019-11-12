@@ -140,7 +140,7 @@ namespace KegMaster.Core
 			btnManageBeverage.Opacity = isSignedIn ? 0 : 1;
 			btnEditProfile.Opacity = isSignedIn ? 0 : 1;
 			btnResetPassword.Opacity = isSignedIn ? 0 : 1;
-			btnCredits.Opacity = 1;
+			btnCredits.Opacity = 0.7;
 
 			if (isSignedIn) {
 				/* Fade welcome and credits first if signing in, else last */
@@ -166,7 +166,7 @@ namespace KegMaster.Core
 			--------------------------------------------*/
 			if (!isSignedIn) {
 				/* Fade credits first if signing in, else last -- prior to changing number of elements on page though */
-				await btnCredits.FadeTo(Convert.ToDouble(false), 250);
+				await btnCredits.FadeTo(0.7*Convert.ToDouble(false), 250);
 
 				/* Make buttons visible */
 				btnManageBeverage.IsVisible = isSignedIn;
@@ -180,7 +180,7 @@ namespace KegMaster.Core
 
 			/* Credits button is special case, always fade in */
 			await btnSignIn.FadeTo(Convert.ToDouble(!isSignedIn), 250);
-			await btnCredits.FadeTo(1, 250);
+			await btnCredits.FadeTo(0.7, 250);
 
 		}
 	}
