@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Net.Http;
-using Microsoft.Identity.Client;
-using KegMaster.Core.Features.LogOn;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 
-using KegMaster.Core.Pages.ManageKegs_Views;
-using System.Diagnostics;
-using System.Threading.Tasks;
+using Microsoft.Identity.Client;
+
 using KegMaster.Core.Pages;
+using KegMaster.Core.Features.LogOn;
+using System.Text.RegularExpressions;
+using System.Net;
+using UIKit;
+using Foundation;
 
 namespace KegMaster.Core
 {
-    public partial class MainPage : ContentPage
+	public partial class MainPage : ContentPage
     {
         protected readonly IAuthenticationService authenticationService;
 
@@ -34,11 +37,6 @@ namespace KegMaster.Core
         {
             await Navigation.PushAsync(new KegMaster_pgView());
         }
-
-		async void OnCredits(object sender, EventArgs e)
-		{
-			await Navigation.PushAsync(new KegMaster_Credits());
-		}
 
 		async void OnSignIn(object sender, EventArgs e) {
 			if (IsBusy) { return; }
@@ -141,17 +139,20 @@ namespace KegMaster.Core
 			btnEditProfile.Opacity = isSignedIn ? 0 : 1;
 			btnResetPassword.Opacity = isSignedIn ? 0 : 1;
 			btnCredits.Opacity = 0.7;
+			btnSupport.Opacity = 0.7;
 
 			if (isSignedIn) {
 				/* Fade welcome and credits first if signing in, else last */
 				await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 250);
 				await btnSignIn.FadeTo(Convert.ToDouble(false), 250);
 				await btnCredits.FadeTo(Convert.ToDouble(false), 250);
+				await btnSupport.FadeTo(Convert.ToDouble(false), 250);
 
 				/* Make buttons visible */
 				btnManageBeverage.IsVisible = isSignedIn;
 				btnEditProfile.IsVisible = isSignedIn;
 				btnResetPassword.IsVisible = isSignedIn;
+				btnCredits.IsVisible = true;
 				btnCredits.IsVisible = true;
 			}
 
@@ -167,12 +168,14 @@ namespace KegMaster.Core
 			if (!isSignedIn) {
 				/* Fade credits first if signing in, else last -- prior to changing number of elements on page though */
 				await btnCredits.FadeTo(0.7*Convert.ToDouble(false), 250);
+				await btnSupport.FadeTo(0.7 * Convert.ToDouble(false), 250);
 
 				/* Make buttons visible */
 				btnManageBeverage.IsVisible = isSignedIn;
 				btnEditProfile.IsVisible = isSignedIn;
 				btnResetPassword.IsVisible = isSignedIn;
 				btnCredits.IsVisible = true;
+				btnSupport.IsVisible = true;
 
 				/* Fade welcome first if signing in, else last */
 				await labelWelcome.FadeTo(Convert.ToDouble(!isSignedIn), 250);
@@ -181,7 +184,53 @@ namespace KegMaster.Core
 			/* Credits button is special case, always fade in */
 			await btnSignIn.FadeTo(Convert.ToDouble(!isSignedIn), 250);
 			await btnCredits.FadeTo(0.7, 250);
+			await btnSupport.FadeTo(0.7, 250);
 
+
+		}
+		async void OnCredits(object sender, EventArgs e)
+		{
+			await Navigation.PushAsync(new KegMaster_Credits());
+		}
+
+		[Obsolete]
+		// TODO: Figure out what I should be calling instead of 'Device.OpenUri"
+		async void OnSupport(object sender, EventArgs e)
+		{
+			string text = "Thanks for your interest in providing feedback! To help me support you, please complete all sections below.\n\n\n**Description of Request:**\n\n**Use Case OR Steps to reproduce:**\n\n**Your contact information**\n\n";
+			var subject = Regex.Replace(Title, @"[^\u0000-\u00FF]", string.Empty);
+			var body = Regex.Replace(text, @"[^\u0000-\u00FF]", string.Empty);
+			var email = Regex.Replace("John@JohnGrenard.com", @"[^\u0000-\u00FF]", string.Empty);
+			var cr_url = "https://gitlab.johngrenard.com/JohnGrenard/kegmaster_xamarinapp/issues";
+			string uri = String.Empty;
+
+			const string SendEmail = "Send an Email";
+			const string CreateCR = "Request a Change To Software";
+			string action = await DisplayActionSheet("Contact Support", "Cancel", null, SendEmail, CreateCR);
+			switch (action) {
+				case SendEmail:
+					if (Device.RuntimePlatform == Device.iOS) {
+						uri = "mailto:" + email + "?subject=" + WebUtility.UrlEncode(subject).Replace("+", "%20") + "&body=" + WebUtility.UrlEncode(body).Replace("+", "%20");
+
+						if (UIApplication.SharedApplication.CanOpenUrl(new NSUrl(uri)))
+							await Task.FromResult(UIApplication.SharedApplication.OpenUrl(new NSUrl(uri)));
+						else
+							await DisplayAlert("Unable to auto-open Email App.", "\nPlease email John@JohnGrenard.com with comments or questions about this app.\n\nBe sure to include a detailed description, so I may best support you.\n\nThanks!", "Back");
+					} else {
+						//for Android it is not necessary to code nor is it necessary to assign a destination email
+						uri = "mailto:" + email + "?subject=" + Title + "&body=" + text;
+						Device.OpenUri(new Uri(uri));
+					}
+					break;
+
+				case CreateCR:
+					Device.OpenUri(new Uri(cr_url));
+					break;
+
+				default:
+					// Do Nothing 
+					break;
+			}
 		}
 	}
 }

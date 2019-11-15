@@ -36,5 +36,14 @@
     <Reference Include="Mono.Android">
       <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.Android.framework\Versions\10.0.3.0\lib\xamarin.android\xbuild-frameworks\MonoAndroid\v9.0\Mono.Android.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib">
+      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.6.0.12\lib\mono\Xamarin.iOS\mscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Android">
+      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.Android.framework\Versions\10.0.6.2\lib\xamarin.android\xbuild-frameworks\MonoAndroid\v10.0\Mono.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Xamarin.iOS.framework\Versions\13.6.0.12\lib\mono\Xamarin.iOS\Xamarin.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

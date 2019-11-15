@@ -100,10 +100,6 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 			this.kegTapData = await manager.GetActiveKegAsync(this.kegTapData.TapNo);
 
 			/* Make robust in the event a user also presses the back button */
-			//bool pageIsActive = Application.Current.PageDisappearing
-			//		.MainPage is TapEdit || (Application.Current.MainPage is NavigationPage navPage && navPage.CurrentPage is TapEdit);
-			//if (Page.D) {
-
 			Device.StartTimer(TimeSpan.FromMilliseconds(2000), () =>
 			{
 				if (Page.IsVisible) {
@@ -153,7 +149,9 @@ namespace KegMaster.Core.Pages.ManageKegs_Views
 		     || (current.Month != challenge.Month)
 			 || (current.Day != challenge.Day) ){
 				ret = challenge;
-				await updateColumn_sendToDb(key, challenge.ToString());
+
+				/* Enable Keg at 12:30 PM by default */
+				await updateColumn_sendToDb(key, challenge.ToUniversalTime().ToString("yyyy-MM-dd HH:mm:ss.fff"));
 			}
 
 			return (ret);
