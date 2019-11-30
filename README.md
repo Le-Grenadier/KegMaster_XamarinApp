@@ -1,0 +1,1 @@
+Written in C# the Xamarin application provides the user interface to the Keg Master. This application highly leverages Azure Web services and serves as a conduit for users to view and update keg data. See my other repositories for more information.
